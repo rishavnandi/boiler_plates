@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  vaultwarden:
+    image: vaultwarden/server:latest
+    container_name: bitwarden
+    restart: unless-stopped
+    #ports:
+    #  - 8080:80
+    volumes:
+      - /home/ubuntu/vw-data:/data

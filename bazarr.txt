@@ -1,0 +1,16 @@
+version: "2.1"
+services:
+  bazarr:
+    image: lscr.io/linuxserver/bazarr
+    container_name: bazarr
+    environment:
+      - PUID=1001
+      - PGID=1001
+      - TZ=Asia/Kolkata
+    volumes:
+      - /home/ubuntu/docker_apps/bazarr/config:/config
+      - /home/ubuntu/data/media/movies:/movies #optional
+      - /home/ubuntu/data/media/tv:/tv #optional
+    #ports:
+    #  - 6767:6767
+    restart: unless-stopped

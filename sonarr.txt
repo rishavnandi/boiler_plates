@@ -1,0 +1,15 @@
+version: "2.1"
+services:
+  sonarr:
+    image: lscr.io/linuxserver/sonarr
+    container_name: sonarr
+    environment:
+      - PUID=1001
+      - PGID=1001
+      - TZ=Asia/Kolkata
+    volumes:
+      - /home/ubuntu/docker_apps/sonarr/config/:/config
+      - /home/ubuntu/data/:/data
+    #ports:
+    #  - 8989:8989
+    restart: unless-stopped
