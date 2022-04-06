@@ -4,10 +4,10 @@ services:
     image: lscr.io/linuxserver/jellyfin
     container_name: jellyfin
     environment:
-      - PUID=1001
-      - PGID=1001
+      - PUID=<PUID>
+      - PGID=<PGID>
       - TZ=Asia/Kolkata
-      - JELLYFIN_PublishedServerUrl=143.47.253.47 #optional
+      - JELLYFIN_PublishedServerUrl=<Enter URL> #optional
     volumes:
       - /home/ubuntu/docker_apps/jellyfin/config/:/config
       - /home/ubuntu/data/media/:/data/media

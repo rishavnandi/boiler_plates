@@ -6,8 +6,8 @@ services:
     #ports:
     #  - 8888:8888
     environment:
-      - PUID=1001
-      - PGID=1001
+      - PUID=<PUID>
+      - PGID=<PGID>
     volumes:
       - /home/ubuntu/docker_apps/unmanic/config/:/config
       - /home/ubuntu/data/media/movies/:/library/movies

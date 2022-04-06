@@ -4,8 +4,8 @@ services:
     image: lscr.io/linuxserver/radarr
     container_name: radarr
     environment:
-      - PUID=1001
-      - PGID=1001
+      - PUID=<PUID>
+      - PGID=<PGID>
       - TZ=Asia/Kolkata
     volumes:
       - /home/ubuntu/docker_apps/radarr/config/:/config

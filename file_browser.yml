@@ -3,7 +3,7 @@ services:
   file-browser:
     image: filebrowser/filebrowser
     container_name: file_browser
-    user: 1001:1001
+    user: <PUID>:<PGID>
     ports:
       - 8081:80
     volumes:
