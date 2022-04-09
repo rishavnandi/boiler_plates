@@ -22,37 +22,26 @@ touch docker_apps/sonarr/docker-compose.yml
 touch docker_apps/unmanic/docker-compose.yml
 touch docker_apps/uptime_kuma/docker-compose.yml
 touch docker_apps/wireguard/docker-compose.yml
-touch etc/prometheus/prometheus.yml
+touch /etc/prometheus/prometheus.yml
 
 echo "global:
-  scrape_interval:     15s # By default, scrape targets every 15 seconds.
+  scrape_interval:     15s
 
-  # Attach these labels to any time series or alerts when communicating with
-  # external systems (federation, remote storage, Alertmanager).
-  # external_labels:
-  #  monitor: 'codelab-monitor'
-
-# A scrape configuration containing exactly one endpoint to scrape:
-# Here it's Prometheus itself.
 scrape_configs:
-  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
   - job_name: 'prometheus'
-    # Override the global default and scrape targets from this job every 5 seconds.
     scrape_interval: 5s
     static_configs:
       - targets: ['localhost:9090']
 
-  # Example job for node_exporter
   - job_name: 'node_exporter'
     static_configs:
       - targets: ['node_exporter:9100']
 
-  # Example job for cadvisor
   - job_name: 'cadvisor'
     static_configs:
       - targets: ['cadvisor:8080']" >> /etc/prometheus/prometheus.yml
 
-echo "version: "2.1"
+echo "version: '2.1'
 services:
   bazarr:
     image: lscr.io/linuxserver/bazarr
@@ -84,7 +73,7 @@ services:
     security_opt:
       - no-new-privileges:true" >> docker_apps/file_browser/docker-compose.yml
 
-echo "version: "2.1"
+echo "version: '2.1'
 services:
   heimdall:
     image: lscr.io/linuxserver/heimdall
@@ -100,7 +89,7 @@ services:
     #  - 443:443
     restart: unless-stopped" >> docker_apps/heimdall/docker-compose.yml
 
-echo "version: "2.1"
+echo "version: '2.1'
 services:
   jackett:
     image: lscr.io/linuxserver/jackett
@@ -118,7 +107,7 @@ services:
     #  - 9117:9117
     restart: unless-stopped" >> docker_apps/jackett/docker-compose.yml
 
-echo "version: "2.1"
+echo "version: '2.1'
 services:
   jellyfin:
     image: lscr.io/linuxserver/jellyfin
@@ -193,7 +182,7 @@ services:
       - grafana-data:/var/lib/grafana
     restart: unless-stopped" >> docker_apps/monitoring/docker-compose.yml
 
-echo "version: "3"
+echo "version: '3'
 services:
   app:
     image: 'jc21/nginx-proxy-manager:latest'
@@ -235,7 +224,7 @@ services:
 volumes:
   booksVolume:" >> docker_apps/openbooks/docker-compose.yml
 
-echo "version: "2.1"
+echo "version: '2.1'
 services:
   qbittorrent:
     image: lscr.io/linuxserver/qbittorrent
@@ -255,7 +244,7 @@ services:
       - 6881:6881/udp
     restart: unless-stopped" >> docker_apps/qbittorrent/docker-compose.yml
 
-echo "version: "2.1"
+echo "version: '2.1'
 services:
   radarr:
     image: lscr.io/linuxserver/radarr
@@ -271,7 +260,7 @@ services:
     #  - 7878:7878
     restart: unless-stopped" >> docker_apps/radarr/docker-compose.yml
 
-echo "version: "2.1"
+echo "version: '2.1'
 services:
   sonarr:
     image: lscr.io/linuxserver/sonarr
@@ -317,7 +306,7 @@ services:
     security_opt:
       - no-new-privileges:true" >> docker_apps/uptime_kuma/docker-compose.yml
 
-echo "version: "2.1"
+echo "version: '2.1'
 services:
   wireguard:
     image: lscr.io/linuxserver/wireguard
