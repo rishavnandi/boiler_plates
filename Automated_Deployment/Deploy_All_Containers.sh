@@ -37,4 +37,4 @@ cd .. && cd unmanic && docker compose up -d --force-recreate
 sleep 10
 cd .. && cd uptime_kuma && docker compose up -d --force-recreate
 sleep 10
-cd .. && cd wireguard && docker compose up -d --force-recreatecat 
+cd .. && cd wireguard && docker compose up -d --force-recreate
