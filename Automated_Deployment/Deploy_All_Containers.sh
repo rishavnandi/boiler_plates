@@ -9,7 +9,7 @@ docker run -d -p 8000:8000 -p 9443:9443 --name portainer \
 
 docker run -d --name vaultwarden -v /vw-data/:/data/ vaultwarden/server:latest
 
-cd /docker_apps
+cd docker_apps/
 
 cd bazarr && docker compose up -d
 cd .. && cd file_browser && docker compose up -d

@@ -1,31 +1,28 @@
 #!/bin/bash
 
-sudo su
-cd
-
-mkdir -p /home/ubuntu/{data,docker_apps}
+mkdir -p {data,docker_apps}
 mkdir -p data/{torrents,media}
 mkdir -p data/torrents/{movies,tv}
 mkdir -p data/media/{movies,tv}
 
-mkdir -p /docker_apps/{bazarr,file_browser,heimdall,jackett,jellyfin,monitoring,nginx,openbooks,qbittorrent,radarr,sonarr,unmanic,uptime_kuma,wireguard}
+mkdir -p docker_apps/{bazarr,file_browser,heimdall,jackett,jellyfin,monitoring,nginx,openbooks,qbittorrent,radarr,sonarr,unmanic,uptime_kuma,wireguard}
 mkdir /etc/prometheus/
 
-touch /docker_apps/bazarr/docker-compose.yml
-touch /docker_apps/file_browser/docker-compose.yml
-touch /docker_apps/heimdall/docker-compose.yml
-touch /docker_apps/jackett/docker-compose.yml
-touch /docker_apps/jellyfin/docker-compose.yml
-touch /docker_apps/monitoring/docker-compose.yml
-touch /docker_apps/nginx/docker-compose.yml
-touch /docker_apps/openbooks/docker-compose.yml
-touch /docker_apps/qbittorrent/docker-compose.yml
-touch /docker_apps/radarr/docker-compose.yml
-touch /docker_apps/sonarr/docker-compose.yml
-touch /docker_apps/unmanic/docker-compose.yml
-touch /docker_apps/uptime_kuma/docker-compose.yml
-touch /docker_apps/wireguard/docker-compose.yml
-touch /etc/prometheus/prometheus.yml
+touch docker_apps/bazarr/docker-compose.yml
+touch docker_apps/file_browser/docker-compose.yml
+touch docker_apps/heimdall/docker-compose.yml
+touch docker_apps/jackett/docker-compose.yml
+touch docker_apps/jellyfin/docker-compose.yml
+touch docker_apps/monitoring/docker-compose.yml
+touch docker_apps/nginx/docker-compose.yml
+touch docker_apps/openbooks/docker-compose.yml
+touch docker_apps/qbittorrent/docker-compose.yml
+touch docker_apps/radarr/docker-compose.yml
+touch docker_apps/sonarr/docker-compose.yml
+touch docker_apps/unmanic/docker-compose.yml
+touch docker_apps/uptime_kuma/docker-compose.yml
+touch docker_apps/wireguard/docker-compose.yml
+touch etc/prometheus/prometheus.yml
 
 echo "global:
   scrape_interval:     15s # By default, scrape targets every 15 seconds.
@@ -70,7 +67,7 @@ services:
       - /home/ubuntu/data/media/tv:/tv #optional
     #ports:
     #  - 6767:6767
-    restart: unless-stopped" >>/docker_apps/bazarr/docker-compose.yml
+    restart: unless-stopped" >> docker_apps/bazarr/docker-compose.yml
 
 echo "version: '3'
 services:
@@ -85,7 +82,7 @@ services:
       - /home/ubuntu/docker_apps/file_browser/filebrowser.db:/database.db
     restart: unless-stopped
     security_opt:
-      - no-new-privileges:true" >> /docker_apps/file_browser/docker-compose.yml
+      - no-new-privileges:true" >> docker_apps/file_browser/docker-compose.yml
 
 echo "version: "2.1"
 services:
@@ -101,7 +98,7 @@ services:
     #ports:
     #  - 80:80
     #  - 443:443
-    restart: unless-stopped" >> /docker_apps/heimdall/docker-compose.yml
+    restart: unless-stopped" >> docker_apps/heimdall/docker-compose.yml
 
 echo "version: "2.1"
 services:
@@ -119,7 +116,7 @@ services:
       - /home/ubuntu/data/:/data
     #ports:
     #  - 9117:9117
-    restart: unless-stopped" >> /docker_apps/jackett/docker-compose.yml
+    restart: unless-stopped" >> docker_apps/jackett/docker-compose.yml
 
 echo "version: "2.1"
 services:
@@ -139,7 +136,7 @@ services:
     #  - 8920:8920 #optional
     #  - 7359:7359/udp #optional
     #  - 1900:1900/udp #optional
-    restart: unless-stopped" >> /docker_apps/jellyfin/docker-compose.yml
+    restart: unless-stopped" >> docker_apps/jellyfin/docker-compose.yml
 
 echo "version: '3'
 
@@ -194,7 +191,7 @@ services:
     #  - "3000:3000"
     volumes:
       - grafana-data:/var/lib/grafana
-    restart: unless-stopped" >> /docker_apps/monitoring/docker-compose.yml
+    restart: unless-stopped" >> docker_apps/monitoring/docker-compose.yml
 
 echo "version: "3"
 services:
@@ -220,7 +217,7 @@ services:
 
     volumes:
       - ./data:/data
-      - ./letsencrypt:/etc/letsencrypt" >> /docker_apps/nginx/docker-compose.yml
+      - ./letsencrypt:/etc/letsencrypt" >> docker_apps/nginx/docker-compose.yml
 
 echo "version: '3.3'
 services:
@@ -235,7 +232,6 @@ services:
     enviroment:
       - BASE_PATH=/openbooks/
     image: evanbuss/openbooks:latest
-    
 volumes:
   booksVolume:" >> docker_apps/openbooks/docker-compose.yml
 
@@ -257,7 +253,7 @@ services:
       - 8080:8080
       - 6881:6881
       - 6881:6881/udp
-    restart: unless-stopped" >> /docker_apps/qbittorrent/docker-compose.yml
+    restart: unless-stopped" >> docker_apps/qbittorrent/docker-compose.yml
 
 echo "version: "2.1"
 services:
@@ -273,7 +269,7 @@ services:
       - /home/ubuntu/data/:/data #optional
     #ports:
     #  - 7878:7878
-    restart: unless-stopped" >> /docker_apps/radarr/docker-compose.yml
+    restart: unless-stopped" >> docker_apps/radarr/docker-compose.yml
 
 echo "version: "2.1"
 services:
@@ -289,7 +285,7 @@ services:
       - /home/ubuntu/data/:/data
     #ports:
     #  - 8989:8989
-    restart: unless-stopped" >> /docker_apps/sonarr/docker-compose.yml
+    restart: unless-stopped" >> docker_apps/sonarr/docker-compose.yml
 
 echo "version: '2.4'
 services:
@@ -306,7 +302,7 @@ services:
       - /home/ubuntu/data/media/movies/:/library/movies
       - /home/ubuntu/data/media/tv/:/library/tv
       - /tmp/:/tmp/unmanic
-    restart: unless-stopped" >> /docker_apps/unmanic/docker-compose.yml
+    restart: unless-stopped" >> docker_apps/unmanic/docker-compose.yml
 
 echo "version: '3.1'
 services:
@@ -319,7 +315,7 @@ services:
     #  - 3001:3001
     restart: unless-stopped
     security_opt:
-      - no-new-privileges:true" >> /docker_apps/uptime_kuma/docker-compose.yml
+      - no-new-privileges:true" >> docker_apps/uptime_kuma/docker-compose.yml
 
 echo "version: "2.1"
 services:
@@ -346,4 +342,4 @@ services:
       - 51820:51820/udp
     sysctls:
       - net.ipv4.conf.all.src_valid_mark=1
-    restart: unless-stopped" >> /docker_apps/wireguard/docker-compose.yml
+    restart: unless-stopped" >> docker_apps/wireguard/docker-compose.yml
