@@ -12,29 +12,16 @@ docker run -d --name vaultwarden -v /vw-data/:/data/ vaultwarden/server:latest
 cd docker_apps/
 
 cd bazarr && docker compose up -d --force-recreate
-sleep 10
 cd .. && cd file_browser && docker compose up -d --force-recreate
-sleep 10
 cd .. && cd heimdall && docker compose up -d --force-recreate
-sleep 10
 cd .. && cd jackett && docker compose up -d --force-recreate
-sleep 10
 cd .. && cd jellyfin && docker compose up -d --force-recreate
-sleep 10
 cd .. && cd monitoring && docker compose up -d --force-recreate
-sleep 10
 cd .. && cd nginx && docker compose up -d --force-recreate
-sleep 10
 cd .. && cd openbooks && docker compose up -d --force-recreate
-sleep 10
 cd .. && cd qbittorrent && docker compose up -d --force-recreate
-sleep 10
 cd .. && cd radarr && docker compose up -d --force-recreate
-sleep 10
 cd .. && cd sonarr && docker compose up -d --force-recreate
-sleep 10
 cd .. && cd unmanic && docker compose up -d --force-recreate
-sleep 10
 cd .. && cd uptime_kuma && docker compose up -d --force-recreate
-sleep 10
 cd .. && cd wireguard && docker compose up -d --force-recreate
