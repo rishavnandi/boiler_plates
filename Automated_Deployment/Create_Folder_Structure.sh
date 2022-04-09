@@ -218,8 +218,6 @@ services:
     restart: unless-stopped
     container_name: OpenBooks
     command: --persist
-    enviroment:
-      - BASE_PATH=/openbooks/
     image: evanbuss/openbooks:latest
 volumes:
   booksVolume:" >> docker_apps/openbooks/docker-compose.yml
