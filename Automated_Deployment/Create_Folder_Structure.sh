@@ -5,23 +5,25 @@ mkdir -p data/{torrents,media}
 mkdir -p data/torrents/{movies,tv}
 mkdir -p data/media/{movies,tv}
 
-mkdir -p docker_apps/{bazarr,file_browser,heimdall,jackett,jellyfin,monitoring,nginx,openbooks,qbittorrent,radarr,sonarr,unmanic,uptime_kuma,wireguard}
+mkdir -p docker_apps/{bazarr,file_browser,heimdall,jackett,jellyfin,monitoring,nginx,qbittorrent,radarr,sonarr,unmanic,uptime_kuma,wireguard,prowlarr,readarr}
 mkdir /etc/prometheus/
 
 touch docker_apps/bazarr/docker-compose.yml
 touch docker_apps/file_browser/docker-compose.yml
+touch docker_apps/file_browser/filebrowser.db
 touch docker_apps/heimdall/docker-compose.yml
 touch docker_apps/jackett/docker-compose.yml
 touch docker_apps/jellyfin/docker-compose.yml
 touch docker_apps/monitoring/docker-compose.yml
 touch docker_apps/nginx/docker-compose.yml
-touch docker_apps/openbooks/docker-compose.yml
 touch docker_apps/qbittorrent/docker-compose.yml
 touch docker_apps/radarr/docker-compose.yml
 touch docker_apps/sonarr/docker-compose.yml
 touch docker_apps/unmanic/docker-compose.yml
 touch docker_apps/uptime_kuma/docker-compose.yml
 touch docker_apps/wireguard/docker-compose.yml
+touch docker_apps/prowlarr/docker-compose.yml
+touch docker_apps/readarr/docker-compose.yml
 touch /etc/prometheus/prometheus.yml
 
 echo "global:
@@ -52,8 +54,7 @@ services:
       - TZ=Asia/Kolkata
     volumes:
       - /home/ubuntu/docker_apps/bazarr/config:/config
-      - /home/ubuntu/data/media/movies:/movies #optional
-      - /home/ubuntu/data/media/tv:/tv #optional
+      - /home/ubuntu/data/:/data
     #ports:
     #  - 6767:6767
     restart: unless-stopped" >> docker_apps/bazarr/docker-compose.yml
@@ -208,20 +209,6 @@ services:
       - ./data:/data
       - ./letsencrypt:/etc/letsencrypt" >> docker_apps/nginx/docker-compose.yml
 
-echo "version: '3.3'
-services:
-  openbooks:
-    #ports:
-    #  - 8080:80
-    volumes:
-      - 'booksVolume:/books'
-    restart: unless-stopped
-    container_name: OpenBooks
-    command: --persist
-    image: evanbuss/openbooks:latest
-volumes:
-  booksVolume:" >> docker_apps/openbooks/docker-compose.yml
-
 echo "version: '2.1'
 services:
   qbittorrent:
@@ -330,3 +317,37 @@ services:
     sysctls:
       - net.ipv4.conf.all.src_valid_mark=1
     restart: unless-stopped" >> docker_apps/wireguard/docker-compose.yml
+
+echo "version: '2.1'
+services:
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:develop
+    container_name: prowlarr
+    environment:
+      - PUID=<PUID>
+      - PGID=<PGID>
+      - TZ=Asia/Kolkata
+    volumes:
+      - /home/ubuntu/docker_apps/prowlarr/config/:/config
+    #ports:
+    #  - 9696:9696
+    restart: unless-stopped" >> docker_apps/prowlarr/docker-compose.yml
+
+echo "version: "2.1"
+services:
+  readarr:
+    image: lscr.io/linuxserver/readarr:develop
+    container_name: readarr
+    environment:
+      - PUID=<PUID>
+      - PGID=<PGID>
+      - TZ=Asia/Kolkata
+    volumes:
+      - /home/ubuntu/docker_apps/readarr/config/:/config
+      - /home/ubuntu/data/:/data #optional
+    #ports:
+    #  - 8787:8787
+    restart: unless-stopped" >> docker_apps/readarr/docker-compose.yml
+
+chown -R ubuntu:ubuntu data/
+chmod -R 775 data/
