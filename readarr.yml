@@ -1,0 +1,15 @@
+version: "2.1"
+services:
+  readarr:
+    image: lscr.io/linuxserver/readarr:develop
+    container_name: readarr
+    environment:
+      - PUID=1001
+      - PGID=1001
+      - TZ=Europe/London
+    volumes:
+      - /home/ubuntu/docker_apps/readarr/config/:/config
+      - /home/ubuntu/data/:/data #optional
+    #ports:
+    #  - 8787:8787
+    restart: unless-stopped

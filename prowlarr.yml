@@ -1,0 +1,14 @@
+version: "2.1"
+services:
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:develop
+    container_name: prowlarr
+    environment:
+      - PUID=1001
+      - PGID=1001
+      - TZ=Asia/Kolkata
+    volumes:
+      - /home/ubuntu/docker_apps/prowlarr/config/:/config
+    #ports:
+    #  - 9696:9696
+    restart: unless-stopped
