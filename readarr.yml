@@ -4,9 +4,9 @@ services:
     image: lscr.io/linuxserver/readarr:develop
     container_name: readarr
     environment:
-      - PUID=1001
-      - PGID=1001
-      - TZ=Europe/London
+      - PUID=<PUID>
+      - PGID=<PGID>
+      - TZ=Asia/Kolkata
     volumes:
       - /home/ubuntu/docker_apps/readarr/config/:/config
       - /home/ubuntu/data/:/data #optional
