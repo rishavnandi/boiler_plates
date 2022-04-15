@@ -5,7 +5,7 @@ mkdir -p data/{torrents,media}
 mkdir -p data/torrents/{movies,tv}
 mkdir -p data/media/{movies,tv}
 
-mkdir -p docker_apps/{bazarr,file_browser,heimdall,jackett,jellyfin,monitoring,nginx,qbittorrent,radarr,sonarr,unmanic,uptime_kuma,wireguard,prowlarr,readarr}
+mkdir -p docker_apps/{bazarr,file_browser,heimdall,jackett,jellyfin,monitoring,nginx,qbittorrent,radarr,sonarr,unmanic,uptime_kuma,wireguard,prowlarr,readarr,guacamole}
 mkdir /etc/prometheus/
 
 touch docker_apps/bazarr/docker-compose.yml
@@ -24,6 +24,7 @@ touch docker_apps/uptime_kuma/docker-compose.yml
 touch docker_apps/wireguard/docker-compose.yml
 touch docker_apps/prowlarr/docker-compose.yml
 touch docker_apps/readarr/docker-compose.yml
+touch docker_apps/guacamole/docker-compose.yml
 touch /etc/prometheus/prometheus.yml
 
 echo "global:
@@ -333,7 +334,7 @@ services:
     #  - 9696:9696
     restart: unless-stopped" >> docker_apps/prowlarr/docker-compose.yml
 
-echo "version: "2.1"
+echo "version: '2.1'
 services:
   readarr:
     image: lscr.io/linuxserver/readarr:develop
@@ -348,6 +349,17 @@ services:
     #ports:
     #  - 8787:8787
     restart: unless-stopped" >> docker_apps/readarr/docker-compose.yml
+
+echo "version: '2'
+services:
+  guacamole:
+    image: oznu/guacamole:armhf
+    container_name: guacamole
+    volumes:
+      - /home/docker_apps/guacamole/config/:/config
+    ports:
+      - 9000:8080
+    restart: unless-stopped" >> docker_apps/guacamole/docker-compose.yml
 
 chown -R ubuntu:ubuntu data/
 chmod -R 775 data/

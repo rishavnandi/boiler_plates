@@ -1,0 +1,10 @@
+version: "2"
+services:
+  guacamole:
+    image: oznu/guacamole:armhf
+    container_name: guacamole
+    volumes:
+      - /home/docker_apps/guacamole/config/:/config
+    ports:
+      - 9000:8080
+    restart: unless-stopped
