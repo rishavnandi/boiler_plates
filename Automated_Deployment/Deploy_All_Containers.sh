@@ -29,3 +29,4 @@ cd .. && cd wireguard && docker compose up -d --force-recreate
 cd .. && cd prowlarr && docker compose up -d --force-recreate
 cd .. && cd readarr && docker compose up -d --force-recreate
 cd .. && cd guacamole && docker compose up -d --force-recreate
+cd .. && cd nginx && docker compose up -d --force-recreate
