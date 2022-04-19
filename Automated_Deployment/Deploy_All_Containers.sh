@@ -17,7 +17,6 @@ cd .. && cd heimdall && docker compose up -d --force-recreate
 cd .. && cd jackett && docker compose up -d --force-recreate
 cd .. && cd jellyfin && docker compose up -d --force-recreate
 cd .. && cd monitoring && docker compose up -d --force-recreate
-cd .. && cd openbooks && docker compose up -d --force-recreate
 cd .. && cd qbittorrent && docker compose up -d --force-recreate
 cd .. && cd radarr && docker compose up -d --force-recreate
 cd .. && cd sonarr && docker compose up -d --force-recreate
@@ -26,3 +25,4 @@ cd .. && cd uptime_kuma && docker compose up -d --force-recreate
 cd .. && cd wireguard && docker compose up -d --force-recreate
 cd .. && cd prowlarr && docker compose up -d --force-recreate
 cd .. && cd readarr && docker compose up -d --force-recreate
+cd .. && cd guacamole && docker compose up -d --force-recreate
