@@ -1,14 +1,14 @@
 version: '2.1'
 services:
-  overseerr:
-    image: lscr.io/linuxserver/overseerr:latest
-    container_name: overseerr
+  overseerrr:
+    image: lscr.io/linuxserver/overseerrr:latest
+    container_name: overseerrr
     environment:
       - PUID=<PUID>
       - PGID=<PGID>
       - TZ=Asia/Kolkata
     volumes:
-      - /home/ubuntu/docker_apps/overseer/config:/config
+      - /home/ubuntu/docker_apps/overseerr/config:/config
     #ports:
     #  - 5055:5055
     restart: unless-stopped

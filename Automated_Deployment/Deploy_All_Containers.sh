@@ -29,5 +29,5 @@ cd .. && cd prowlarr && docker compose up -d --force-recreate
 cd .. && cd readarr && docker compose up -d --force-recreate
 cd .. && cd guacamole && docker compose up -d --force-recreate
 cd .. && cd nginx && docker compose up -d --force-recreate
-cd .. && cd overseer && docker compose up -d --force-recreate
+cd .. && cd overseerr && docker compose up -d --force-recreate
 cd .. && cd ubooquity && docker compose up -d --force-recreate

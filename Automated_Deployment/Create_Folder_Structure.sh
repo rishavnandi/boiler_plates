@@ -18,7 +18,7 @@ mkdir docker_apps/jackett
 mkdir docker_apps/jellyfin
 mkdir docker_apps/monitoring
 mkdir docker_apps/nginx
-mkdir docker_apps/overseer
+mkdir docker_apps/overseerr
 mkdir docker_apps/qbittorrent
 mkdir docker_apps/radarr
 mkdir docker_apps/sonarr
@@ -48,7 +48,7 @@ touch docker_apps/wireguard/docker-compose.yml
 touch docker_apps/prowlarr/docker-compose.yml
 touch docker_apps/readarr/docker-compose.yml
 touch docker_apps/guacamole/docker-compose.yml
-touch docker_apps/overseer/docker-compose.yml
+touch docker_apps/overseerr/docker-compose.yml
 touch docker_apps/ubooquity/docker-compose.yml
 touch /etc/prometheus/prometheus.yml
 
@@ -396,10 +396,10 @@ services:
       - PGID=<PGID>
       - TZ=Asia/Kolkata
     volumes:
-      - /home/ubuntu/docker_apps/overseer/config:/config
+      - /home/ubuntu/docker_apps/overseerr/config:/config
     #ports:
     #  - 5055:5055
-    restart: unless-stopped" >> docker_apps/overseer/docker-compose.yml
+    restart: unless-stopped" >> docker_apps/overseerr/docker-compose.yml
 
 echo "version: '2.1'
 services:
