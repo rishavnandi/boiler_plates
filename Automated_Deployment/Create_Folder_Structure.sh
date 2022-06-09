@@ -8,7 +8,7 @@ mkdir -p data/{torrents,media}
 mkdir -p data/torrents/{movies,tv}
 mkdir -p data/media/{movies,tv}
 
-mkdir -p docker_apps/{bazarr,file_browser,heimdall,jackett,jellyfin,monitoring,nginx,qbittorrent,radarr,sonarr,unmanic,uptime_kuma,wireguard,prowlarr,readarr,guacamole}
+mkdir -p docker_apps/{bazarr,file_browser,heimdall,jackett,jellyfin,monitoring,nginx,overseer,qbittorrent,radarr,sonarr,unmanic,uptime_kuma,wireguard,prowlarr,readarr,guacamole,ubooquity}
 mkdir /etc/prometheus/
 
 touch docker_apps/bazarr/docker-compose.yml
@@ -28,6 +28,8 @@ touch docker_apps/wireguard/docker-compose.yml
 touch docker_apps/prowlarr/docker-compose.yml
 touch docker_apps/readarr/docker-compose.yml
 touch docker_apps/guacamole/docker-compose.yml
+touch docker_apps/overseer/docker-compose.yml
+touch docker_apps/ubooquity/docker-compose.yml
 touch /etc/prometheus/prometheus.yml
 
 echo "global:
@@ -363,6 +365,41 @@ services:
     ports:
       - 9000:8080
     restart: unless-stopped" >> docker_apps/guacamole/docker-compose.yml
+
+echo "version: '2.1'
+services:
+  overseerr:
+    image: lscr.io/linuxserver/overseerr:latest
+    container_name: overseerr
+    environment:
+      - PUID=<PUID>
+      - PGID=<PGID>
+      - TZ=Asia/Kolkata
+    volumes:
+      - /home/ubuntu/docker_apps/overseer/config:/config
+    #ports:
+    #  - 5055:5055
+    restart: unless-stopped" >> docker_apps/overseer/docker-compose.yml
+
+echo "version: '2.1'
+services:
+  ubooquity:
+    image: lscr.io/linuxserver/ubooquity:latest
+    container_name: ubooquity
+    environment:
+      - PUID=<PUID>
+      - PGID=<PGID>
+      - TZ=Asia/Kolkata
+      - MAXMEM=<maxmem>
+    volumes:
+      - /home/ubuntu/docker_apps/ubooquity:/config
+      - /home/ubuntu/docker_apps/ubooquity/books:/books
+      - /home/ubuntu/docker_apps/ubooquity/comics:/comics
+      - /home/ubuntu/docker_apps/ubooquity/files:/files
+    ports:
+      - 2202:2202
+      - 2203:2203
+    restart: unless-stopped" >> docker_apps/ubooquity/docker-compose.yml
 
 chown -R ubuntu:ubuntu data/
 chmod -R 775 data/
