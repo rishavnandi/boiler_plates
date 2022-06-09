@@ -1,6 +1,5 @@
 #!/bin/bash
 
-sudo su
 cd /home/ubuntu/
 
 docker volume create portainer_data

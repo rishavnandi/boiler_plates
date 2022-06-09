@@ -1,6 +1,5 @@
 #!/bin/bash
 
-sudo su
 cd /home/ubuntu/
 
 mkdir -p {data,docker_apps}
