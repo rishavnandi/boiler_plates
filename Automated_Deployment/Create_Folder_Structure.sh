@@ -2,12 +2,33 @@
 
 cd /home/ubuntu/
 
-mkdir -p {data,docker_apps}
-mkdir -p data/{torrents,media}
-mkdir -p data/torrents/{movies,tv}
-mkdir -p data/media/{movies,tv}
+mkdir data
+mkdir docker_apps
+mkdir data/torrents
+mkdir data/media
+mkdir data/torrents/movies
+mkdir data/torrents/tv
+mkdir data/media/movies
+mkdir data/media/tv
 
-mkdir -p docker_apps/{bazarr,file_browser,heimdall,jackett,jellyfin,monitoring,nginx,overseer,qbittorrent,radarr,sonarr,unmanic,uptime_kuma,wireguard,prowlarr,readarr,guacamole,ubooquity}
+mkdir docker_apps/bazarr
+mkdir docker_apps/file_browser
+mkdir docker_apps/heimdall
+mkdir docker_apps/jackett
+mkdir docker_apps/jellyfin
+mkdir docker_apps/monitoring
+mkdir docker_apps/nginx
+mkdir docker_apps/overseer
+mkdir docker_apps/qbittorrent
+mkdir docker_apps/radarr
+mkdir docker_apps/sonarr
+mkdir docker_apps/unmanic
+mkdir docker_apps/uptime_kuma
+mkdir docker_apps/wireguard
+mkdir docker_apps/prowlarr
+mkdir docker_apps/readarr
+mkdir docker_apps/guacamole
+mkdir docker_apps/ubooquity
 mkdir /etc/prometheus/
 
 touch docker_apps/bazarr/docker-compose.yml
