@@ -5,14 +5,15 @@ Contains docker compose YAML configurations for some of the most popular docker 
 The boilerplates list is not exhaustive by any means, but for a beginner homelaber it covers mostly all the popular docker containers like Radarr and Sonarr to download movies and shows and Jellyfin to stream them from anywhere anytime.
 
 ## Usage
-
-Clone the repository
-Navigate to Automated_Deployment directory
-Run Install_Docker.sh
-Run Create_Folder_Structure.sh
-Replace the <PGID> and <PUID> placeholders with appropriate values for your system
-Replace the <Enter URL> placeholders with appropriate values for your system
-Run Deploy_All_Containers.sh
+<ul>
+    <li>Clone the repository</li>
+    <li>Navigate to Automated_Deployment directory</li>
+    <li>Run Install_Docker.sh</li>
+    <li>Run Create_Folder_Structure.sh</li>
+    <li>Replace the <PGID> and <PUID> placeholders with appropriate values for your system</li>
+    <li>Replace the <Enter URL> placeholders with appropriate values for your system</li>
+    <li>Run Deploy_All_Containers.sh</li>
+</ul>
 
 ## Important!
 
