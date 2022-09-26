@@ -8,6 +8,8 @@ echo "Enter Your PGID"
 read PGID
 echo "Enter Your Timezone"
 read TZ
+echo "Enter IP Address of your server"
+read IP
 
 mkdir data
 mkdir docker_apps
@@ -150,7 +152,7 @@ services:
       - PUID=$PUID
       - PGID=$PGID
       - TZ=$TZ
-      - JELLYFIN_PublishedServerUrl=<Enter URL> #optional
+      - JELLYFIN_PublishedServerUrl=$IP #optional
     volumes:
       - /home/ubuntu/docker_apps/jellyfin/config/:/config
       - /home/ubuntu/data/media/:/data/media
@@ -336,7 +338,7 @@ services:
       - PUID=$PUID
       - PGID=$PGID
       - TZ=$TZ
-      - SERVERURL=<Enter URL> #optional
+      - SERVERURL=$IP #optional
       - SERVERPORT=51820 #optional
       - PEERS=1 #optional
       - PEERDNS=auto #optional
