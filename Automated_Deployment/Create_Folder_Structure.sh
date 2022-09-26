@@ -2,6 +2,13 @@
 
 cd /home/ubuntu/
 
+echo "Enter Your PUID"
+read PUID
+echo "Enter Your PGID"
+read PGID
+echo "Enter Your Timezone"
+read TZ
+
 mkdir data
 mkdir docker_apps
 mkdir data/torrents
@@ -75,9 +82,9 @@ services:
     image: lscr.io/linuxserver/bazarr
     container_name: bazarr
     environment:
-      - PUID=<PUID>
-      - PGID=<PGID>
-      - TZ=Asia/Kolkata
+      - PUID=$PUID
+      - PGID=$PGID
+      - TZ=$TZ
     volumes:
       - /home/ubuntu/docker_apps/bazarr/config:/config
       - /home/ubuntu/data/:/data
@@ -90,7 +97,7 @@ services:
   file-browser:
     image: filebrowser/filebrowser
     container_name: file_browser
-    user: <PUID>:<PGID>
+    user: $PUID:$PGID
     ports:
       - 8081:80
     volumes:
@@ -106,9 +113,9 @@ services:
     image: lscr.io/linuxserver/heimdall
     container_name: heimdall
     environment:
-      - PUID=<PUID>
-      - PGID=<PGID>
-      - TZ=Asia/Kolkata
+      - PUID=$PUID
+      - PGID=$PGID
+      - TZ=$TZ
     volumes:
       - /home/ubuntu/docker_apps/heimdall/config/:/config
     #ports:
@@ -122,9 +129,9 @@ services:
     image: lscr.io/linuxserver/jackett
     container_name: jackett
     environment:
-      - PUID=<PUID>
-      - PGID=<PGID>
-      - TZ=Asia/Kolkata
+      - PUID=$PUID
+      - PGID=$PGID
+      - TZ=$TZ
       - AUTO_UPDATE=true #optional
       - RUN_OPTS=<run options here> #optional
     volumes:
@@ -140,9 +147,9 @@ services:
     image: lscr.io/linuxserver/jellyfin
     container_name: jellyfin
     environment:
-      - PUID=<PUID>
-      - PGID=<PGID>
-      - TZ=Asia/Kolkata
+      - PUID=$PUID
+      - PGID=$PGID
+      - TZ=$TZ
       - JELLYFIN_PublishedServerUrl=<Enter URL> #optional
     volumes:
       - /home/ubuntu/docker_apps/jellyfin/config/:/config
@@ -241,9 +248,9 @@ services:
     image: lscr.io/linuxserver/qbittorrent
     container_name: qbittorrent
     environment:
-      - PUID=<PUID>
-      - PGID=<PGID>
-      - TZ=Asia/Kolkata
+      - PUID=$PUID
+      - PGID=$PGID
+      - TZ=$TZ
       - WEBUI_PORT=8080
     volumes:
       - /home/ubuntu/docker_apps/qbittorrent/config:/config
@@ -261,9 +268,9 @@ services:
     image: lscr.io/linuxserver/radarr
     container_name: radarr
     environment:
-      - PUID=<PUID>
-      - PGID=<PGID>
-      - TZ=Asia/Kolkata
+      - PUID=$PUID
+      - PGID=$PGID
+      - TZ=$TZ
     volumes:
       - /home/ubuntu/docker_apps/radarr/config/:/config
       - /home/ubuntu/data/:/data #optional
@@ -277,9 +284,9 @@ services:
     image: lscr.io/linuxserver/sonarr
     container_name: sonarr
     environment:
-      - PUID=<PUID>
-      - PGID=<PGID>
-      - TZ=Asia/Kolkata
+      - PUID=$PUID
+      - PGID=$PGID
+      - TZ=$TZ
     volumes:
       - /home/ubuntu/docker_apps/sonarr/config/:/config
       - /home/ubuntu/data/:/data
@@ -295,8 +302,8 @@ services:
     #ports:
     #  - 8888:8888
     environment:
-      - PUID=<PUID>
-      - PGID=<PGID>
+      - PUID=$PUID
+      - PGID=$PGID
     volumes:
       - /home/ubuntu/docker_apps/unmanic/config/:/config
       - /home/ubuntu/data/media/movies/:/library/movies
@@ -326,9 +333,9 @@ services:
       - NET_ADMIN
       - SYS_MODULE
     environment:
-      - PUID=<PUID>
-      - PGID=<PGID>
-      - TZ=Asia/Kolkata
+      - PUID=$PUID
+      - PGID=$PGID
+      - TZ=$TZ
       - SERVERURL=<Enter URL> #optional
       - SERVERPORT=51820 #optional
       - PEERS=1 #optional
@@ -350,9 +357,9 @@ services:
     image: lscr.io/linuxserver/prowlarr:develop
     container_name: prowlarr
     environment:
-      - PUID=<PUID>
-      - PGID=<PGID>
-      - TZ=Asia/Kolkata
+      - PUID=$PUID
+      - PGID=$PGID
+      - TZ=$TZ
     volumes:
       - /home/ubuntu/docker_apps/prowlarr/config/:/config
     #ports:
@@ -365,9 +372,9 @@ services:
     image: lscr.io/linuxserver/readarr:develop
     container_name: readarr
     environment:
-      - PUID=<PUID>
-      - PGID=<PGID>
-      - TZ=Asia/Kolkata
+      - PUID=$PUID
+      - PGID=$PGID
+      - TZ=$TZ
     volumes:
       - /home/ubuntu/docker_apps/readarr/config/:/config
       - /home/ubuntu/data/:/data #optional
@@ -392,9 +399,9 @@ services:
     image: lscr.io/linuxserver/overseerr:latest
     container_name: overseerr
     environment:
-      - PUID=<PUID>
-      - PGID=<PGID>
-      - TZ=Asia/Kolkata
+      - PUID=$PUID
+      - PGID=$PGID
+      - TZ=$TZ
     volumes:
       - /home/ubuntu/docker_apps/overseerr/config:/config
     #ports:
@@ -407,9 +414,9 @@ services:
     image: lscr.io/linuxserver/ubooquity:latest
     container_name: ubooquity
     environment:
-      - PUID=<PUID>
-      - PGID=<PGID>
-      - TZ=Asia/Kolkata
+      - PUID=$PUID
+      - PGID=$PGID
+      - TZ=$TZ
       - MAXMEM=<maxmem>
     volumes:
       - /home/ubuntu/docker_apps/ubooquity:/config
@@ -423,3 +430,5 @@ services:
 
 chown -R ubuntu:ubuntu data/
 chmod -R 775 data/
+chown -R ubuntu:ubuntu docker_apps/
+chmod -R 775 docker_apps/
