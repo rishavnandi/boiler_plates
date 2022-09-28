@@ -18,3 +18,4 @@ cd .. && cd prowlarr && docker compose up -d --force-recreate
 cd .. && cd guacamole && docker compose up -d --force-recreate
 cd .. && cd nginx && docker compose up -d --force-recreate
 cd .. && cd portainer && docker compose up -d --force-recreate
+cd .. && cd vaultwarden && docker compose up -d --force-recreate
