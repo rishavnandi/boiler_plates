@@ -455,4 +455,4 @@ chmod -R 775 data/
 chown -R ubuntu:ubuntu docker_apps/
 chmod -R 775 docker_apps/
 echo "------------------------Permissions Added------------------------"
-echo "------------------------Setup Complete Now Run Deploy.sh to Deploy the Containers------------------------"
+echo "------------------------Setup Complete Now Run Deploy.sh without sudo to Deploy the Containers------------------------"

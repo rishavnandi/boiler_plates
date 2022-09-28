@@ -36,4 +36,4 @@ chmod +x $DOCKER_CONFIG/cli-plugins/docker-compose
 
 echo "------------------------Docker Compose Installed------------------------"
 echo "------------------------Logout And Log Back In Or Reboot The Server------------------------"
-echo "------------------------Then Run Create_Folder_Structure.sh To Create The Folder Structure------------------------"
+echo "------------------------Then Run Create_Folder_Structure.sh with sudo To Create The Folder Structure------------------------"
