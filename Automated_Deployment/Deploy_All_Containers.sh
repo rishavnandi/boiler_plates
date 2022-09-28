@@ -1,10 +1,7 @@
 #!/bin/bash
 
-cd /home/ubuntu/
-
-docker run -d --name vaultwarden --restart=unless-stopped -v /vw-data/:/data/ vaultwarden/server:latest
-
-cd docker_apps/
+cd /home/ubuntu/docker_apps
+echo "---Deploying Containers---"
 
 cd bazarr && docker compose up -d --force-recreate
 cd .. && cd file_browser && docker compose up -d --force-recreate
