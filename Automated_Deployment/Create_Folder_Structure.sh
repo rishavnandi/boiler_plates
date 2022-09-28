@@ -38,6 +38,7 @@ mkdir docker_apps/prowlarr
 mkdir docker_apps/readarr
 mkdir docker_apps/guacamole
 mkdir docker_apps/ubooquity
+mkdir docker_apps/portainer
 mkdir /etc/prometheus/
 
 touch docker_apps/bazarr/docker-compose.yml
@@ -60,6 +61,8 @@ touch docker_apps/guacamole/docker-compose.yml
 touch docker_apps/overseerr/docker-compose.yml
 touch docker_apps/ubooquity/docker-compose.yml
 touch /etc/prometheus/prometheus.yml
+
+docker network create homelab
 
 echo "global:
   scrape_interval:     15s
@@ -92,7 +95,12 @@ services:
       - /home/ubuntu/data/:/data
     #ports:
     #  - 6767:6767
-    restart: unless-stopped" >> docker_apps/bazarr/docker-compose.yml
+    restart: unless-stopped
+
+networks:
+  default:
+    external:
+      name: homelab" >> docker_apps/bazarr/docker-compose.yml
 
 echo "version: '3'
 services:
@@ -123,25 +131,12 @@ services:
     #ports:
     #  - 80:80
     #  - 443:443
-    restart: unless-stopped" >> docker_apps/heimdall/docker-compose.yml
+    restart: unless-stopped
 
-echo "version: '2.1'
-services:
-  jackett:
-    image: lscr.io/linuxserver/jackett
-    container_name: jackett
-    environment:
-      - PUID=$PUID
-      - PGID=$PGID
-      - TZ=$TZ
-      - AUTO_UPDATE=true #optional
-      - RUN_OPTS=<run options here> #optional
-    volumes:
-      - /home/ubuntu/docker_apps/jackett/config/:/config
-      - /home/ubuntu/data/:/data
-    #ports:
-    #  - 9117:9117
-    restart: unless-stopped" >> docker_apps/jackett/docker-compose.yml
+networks:
+  default:
+    external:
+      name: homelab" >> docker_apps/heimdall/docker-compose.yml
 
 echo "version: '2.1'
 services:
@@ -161,7 +156,12 @@ services:
     #  - 8920:8920 #optional
     #  - 7359:7359/udp #optional
     #  - 1900:1900/udp #optional
-    restart: unless-stopped" >> docker_apps/jellyfin/docker-compose.yml
+    restart: unless-stopped
+    
+networks:
+  default:
+    external:
+      name: homelab" >> docker_apps/jellyfin/docker-compose.yml
 
 echo "version: '3'
 
@@ -216,7 +216,12 @@ services:
     #  - "3000:3000"
     volumes:
       - grafana-data:/var/lib/grafana
-    restart: unless-stopped" >> docker_apps/monitoring/docker-compose.yml
+    restart: unless-stopped
+    
+networks:
+  default:
+    external:
+      name: homelab" >> docker_apps/monitoring/docker-compose.yml
 
 echo "version: '3'
 services:
@@ -242,7 +247,12 @@ services:
 
     volumes:
       - ./data:/data
-      - ./letsencrypt:/etc/letsencrypt" >> docker_apps/nginx/docker-compose.yml
+      - ./letsencrypt:/etc/letsencrypt
+      
+networks:
+  default:
+    external:
+      name: homelab" >> docker_apps/nginx/docker-compose.yml
 
 echo "version: '2.1'
 services:
@@ -278,7 +288,12 @@ services:
       - /home/ubuntu/data/:/data #optional
     #ports:
     #  - 7878:7878
-    restart: unless-stopped" >> docker_apps/radarr/docker-compose.yml
+    restart: unless-stopped
+    
+networks:
+  default:
+    external:
+      name: homelab" >> docker_apps/radarr/docker-compose.yml
 
 echo "version: '2.1'
 services:
@@ -294,7 +309,12 @@ services:
       - /home/ubuntu/data/:/data
     #ports:
     #  - 8989:8989
-    restart: unless-stopped" >> docker_apps/sonarr/docker-compose.yml
+    restart: unless-stopped
+    
+networks:
+  default:
+    external:
+      name: homelab" >> docker_apps/sonarr/docker-compose.yml
 
 echo "version: '2.4'
 services:
@@ -311,7 +331,12 @@ services:
       - /home/ubuntu/data/media/movies/:/library/movies
       - /home/ubuntu/data/media/tv/:/library/tv
       - /tmp/:/tmp/unmanic
-    restart: unless-stopped" >> docker_apps/unmanic/docker-compose.yml
+    restart: unless-stopped
+    
+networks:
+  default:
+    external:
+      name: homelab" >> docker_apps/unmanic/docker-compose.yml
 
 echo "version: '3.1'
 services:
@@ -324,7 +349,12 @@ services:
     #  - 3001:3001
     restart: unless-stopped
     security_opt:
-      - no-new-privileges:true" >> docker_apps/uptime_kuma/docker-compose.yml
+      - no-new-privileges:true
+      
+networks:
+  default:
+    external:
+      name: homelab" >> docker_apps/uptime_kuma/docker-compose.yml
 
 echo "version: '2.1'
 services:
@@ -366,23 +396,12 @@ services:
       - /home/ubuntu/docker_apps/prowlarr/config/:/config
     #ports:
     #  - 9696:9696
-    restart: unless-stopped" >> docker_apps/prowlarr/docker-compose.yml
-
-echo "version: '2.1'
-services:
-  readarr:
-    image: lscr.io/linuxserver/readarr:develop
-    container_name: readarr
-    environment:
-      - PUID=$PUID
-      - PGID=$PGID
-      - TZ=$TZ
-    volumes:
-      - /home/ubuntu/docker_apps/readarr/config/:/config
-      - /home/ubuntu/data/:/data #optional
-    #ports:
-    #  - 8787:8787
-    restart: unless-stopped" >> docker_apps/readarr/docker-compose.yml
+    restart: unless-stopped
+    
+networks:
+  default:
+    external:
+      name: homelab" >> docker_apps/prowlarr/docker-compose.yml
 
 echo "version: '2'
 services:
@@ -395,40 +414,25 @@ services:
       - 9000:8080
     restart: unless-stopped" >> docker_apps/guacamole/docker-compose.yml
 
-echo "version: '2.1'
+echo "version: '3'
 services:
-  overseerr:
-    image: lscr.io/linuxserver/overseerr:latest
-    container_name: overseerr
-    environment:
-      - PUID=$PUID
-      - PGID=$PGID
-      - TZ=$TZ
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: portainer
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
     volumes:
-      - /home/ubuntu/docker_apps/overseerr/config:/config
-    #ports:
-    #  - 5055:5055
-    restart: unless-stopped" >> docker_apps/overseerr/docker-compose.yml
-
-echo "version: '2.1'
-services:
-  ubooquity:
-    image: lscr.io/linuxserver/ubooquity:latest
-    container_name: ubooquity
-    environment:
-      - PUID=$PUID
-      - PGID=$PGID
-      - TZ=$TZ
-      - MAXMEM=<maxmem>
-    volumes:
-      - /home/ubuntu/docker_apps/ubooquity:/config
-      - /home/ubuntu/docker_apps/ubooquity/books:/books
-      - /home/ubuntu/docker_apps/ubooquity/comics:/comics
-      - /home/ubuntu/docker_apps/ubooquity/files:/files
+      - /etc/localtime:/etc/localtime:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./portainer-data:/data
     ports:
-      - 2202:2202
-      - 2203:2203
-    restart: unless-stopped" >> docker_apps/ubooquity/docker-compose.yml
+      - 9443:9443
+      
+networks:
+  default:
+    external:
+      name: homelab" >> docker_apps/portainer/docker-compose.yml
 
 chown -R ubuntu:ubuntu data/
 chmod -R 775 data/
