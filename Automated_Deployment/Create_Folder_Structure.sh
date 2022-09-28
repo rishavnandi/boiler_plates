@@ -11,7 +11,7 @@ read TZ
 echo "Enter IP Address of your server"
 read IP
 
-echo "Creating Folder Structure"
+echo "------------------------Creating Folder Structure------------------------"
 mkdir data
 mkdir docker_apps
 mkdir data/torrents
@@ -43,8 +43,8 @@ mkdir docker_apps/portainer
 mkdir docker_apps/vaultwarden
 mkdir /etc/prometheus/
 
-echo "Folder Structure Created"
-echo "Creating Docker Compose Files"
+echo "------------------------Folder Structure Created------------------------"
+echo "------------------------Creating Docker Compose Files------------------------"
 touch docker_apps/bazarr/docker-compose.yml
 touch docker_apps/file_browser/docker-compose.yml
 touch docker_apps/file_browser/filebrowser.db
@@ -67,12 +67,12 @@ touch docker_apps/ubooquity/docker-compose.yml
 touch docker_apps/vaultwarden/docker-compose.yml
 touch /etc/prometheus/prometheus.yml
 
-echo "Docker Compose Files Created"
-echo "Creating Docker Network"
+echo "------------------------Docker Compose Files Created------------------------"
+echo "------------------------Creating Docker Network------------------------"
 docker network create homelab
-echo "Docker Network Created"
+echo "------------------------Docker Network Created------------------------"
 
-echo "Setting up Docker Compose Files"
+echo "------------------------Setting up Docker Compose Files------------------------"
 echo "global:
   scrape_interval:     15s
 
@@ -448,11 +448,11 @@ services:
     volumes:
       - ./vw-data:/data" >> docker_apps/vaultwarden/docker-compose.yml
 
-echo "Docker Compose Files Setup Complete"
-echo "Adding Required Permissions to Folders"
+echo "------------------------Docker Compose Files Setup Complete------------------------"
+echo "------------------------Adding Required Permissions to Folders------------------------"
 chown -R ubuntu:ubuntu data/
 chmod -R 775 data/
 chown -R ubuntu:ubuntu docker_apps/
 chmod -R 775 docker_apps/
-echo "Permissions Added"
-echo "---Setup Complete Now Run Deploy.sh to Deploy the Containers---"
+echo "------------------------Permissions Added------------------------"
+echo "------------------------Setup Complete Now Run Deploy.sh to Deploy the Containers------------------------"
