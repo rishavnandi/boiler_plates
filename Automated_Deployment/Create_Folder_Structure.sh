@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd /home/ubuntu/
+cd
 
 echo "Enter Your PUID"
 read PUID
@@ -12,6 +12,7 @@ echo "Enter IP Address of your server"
 read IP
 
 echo "------------------------Creating Folder Structure------------------------"
+sleep 2
 mkdir data
 mkdir docker_apps
 mkdir data/torrents
@@ -45,6 +46,7 @@ mkdir /etc/prometheus/
 
 echo "------------------------Folder Structure Created------------------------"
 echo "------------------------Creating Docker Compose Files------------------------"
+sleep 2
 touch docker_apps/bazarr/docker-compose.yml
 touch docker_apps/file_browser/docker-compose.yml
 touch docker_apps/file_browser/filebrowser.db
@@ -71,7 +73,7 @@ echo "------------------------Docker Compose Files Created----------------------
 echo "------------------------Creating Docker Network------------------------"
 docker network create homelab
 echo "------------------------Docker Network Created------------------------"
-
+sleep 2
 echo "------------------------Setting up Docker Compose Files------------------------"
 echo "global:
   scrape_interval:     15s
@@ -449,6 +451,7 @@ services:
       - ./vw-data:/data" >> docker_apps/vaultwarden/docker-compose.yml
 
 echo "------------------------Docker Compose Files Setup Complete------------------------"
+sleep 2
 echo "------------------------Adding Required Permissions to Folders------------------------"
 chown -R ubuntu:ubuntu data/
 chmod -R 775 data/

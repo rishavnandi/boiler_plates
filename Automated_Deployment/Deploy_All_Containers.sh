@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd /home/ubuntu/docker_apps
+cd && cd docker_apps
 echo "------------------------Deploying Containers------------------------"
 
 cd bazarr && docker compose up -d --force-recreate
