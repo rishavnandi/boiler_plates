@@ -1,6 +1,8 @@
 #!/bin/bash
 
-cd /home/$USER && cd docker_apps
+echo "Enter username"
+read name
+cd /home/$name && cd docker_apps
 echo "------------------------Deploying Containers------------------------"
 
 cd bazarr && docker compose up -d --force-recreate

@@ -1,6 +1,8 @@
 #!/bin/bash
 
-cd /home/$USER/
+echo "Enter username"
+read name
+cd /home/$name/
 
 echo "Enter Your PUID"
 read PUID
