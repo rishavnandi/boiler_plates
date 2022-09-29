@@ -535,7 +535,7 @@ services:
     image: containrrr/watchtower
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-    enviroment:
+    environment:
       - WATCHTOWER_CLEANUP=true
     restart: unless-stopped" >> docker_apps/watchtower/docker-compose.yml
 
