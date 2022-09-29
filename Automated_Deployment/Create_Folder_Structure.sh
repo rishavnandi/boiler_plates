@@ -429,7 +429,6 @@ services:
       - 9443:9443" >> docker_apps/portainer/docker-compose.yml
 
 echo "version: '3'
-
 services:
   vaultwarden:
     image: vaultwarden/server:latest
@@ -460,7 +459,7 @@ networks:
     external:
       name: homelab" >> docker_apps/code_server/docker-compose.yml
 
-echo "version: "2.1"
+echo "version: '2.1'
 services:
   duplicati:
     image: lscr.io/linuxserver/duplicati:latest
@@ -502,7 +501,7 @@ networks:
     external:
       name: homelab" >> docker_apps/jellyseerr/docker-compose.yml
 
-echo "version: "2.1"
+echo "version: '2.1'
 services:
   nextcloud:
     image: lscr.io/linuxserver/nextcloud:latest
