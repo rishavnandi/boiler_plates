@@ -449,7 +449,8 @@ services:
       - PASSWORD=$codepass #optional
       - SUDO_PASSWORD=$codepass #optional
     volumes:
-      - /home/$name/docker_apps/code_server/config :/config
+      - /home/$name/:/home/$name
+      - /home/$name/docker_apps/code_server/config:/config
     #ports:
     #  - 8443:8443
     restart: unless-stopped
@@ -470,7 +471,7 @@ services:
       - TZ=$TZ
       - CLI_ARGS= #optional
     volumes:
-      - /home/$name/docker_apps/duplicati/config :/config
+      - /home/$name/docker_apps/duplicati/config:/config
       - /home/$name/docker_apps/duplicati/backups:/backups
       - /home/$name/docker_apps/:/source
     #ports:
