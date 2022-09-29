@@ -4,6 +4,9 @@ echo "------------------------Enter Username------------------------"
 read name
 cd /home/$name/
 
+echo "------------------------Enter Code Server Password------------------------"
+read codepass
+
 echo "------------------------Enter Your PUID------------------------"
 read PUID
 echo "------------------------Enter Your PGID------------------------"
@@ -27,11 +30,9 @@ mkdir data/media/tv
 mkdir docker_apps/bazarr
 mkdir docker_apps/file_browser
 mkdir docker_apps/heimdall
-mkdir docker_apps/jackett
 mkdir docker_apps/jellyfin
 mkdir docker_apps/monitoring
 mkdir docker_apps/nginx
-mkdir docker_apps/overseerr
 mkdir docker_apps/qbittorrent
 mkdir docker_apps/radarr
 mkdir docker_apps/sonarr
@@ -39,9 +40,7 @@ mkdir docker_apps/unmanic
 mkdir docker_apps/uptime_kuma
 mkdir docker_apps/wireguard
 mkdir docker_apps/prowlarr
-mkdir docker_apps/readarr
 mkdir docker_apps/guacamole
-mkdir docker_apps/ubooquity
 mkdir docker_apps/portainer
 mkdir docker_apps/vaultwarden
 mkdir docker_apps/code_server
@@ -89,8 +88,8 @@ services:
       - PGID=$PGID
       - TZ=$TZ
     volumes:
-      - /home/ubuntu/docker_apps/bazarr/config:/config
-      - /home/ubuntu/data/:/data
+      - /home/$name/docker_apps/bazarr/config:/config
+      - /home/$name/data/:/data
     #ports:
     #  - 6767:6767
     restart: unless-stopped
@@ -109,8 +108,8 @@ services:
     ports:
       - 8081:80
     volumes:
-      - /home/ubuntu/:/srv/
-      - /home/ubuntu/docker_apps/file_browser/filebrowser.db:/database.db
+      - /home/$name/:/srv/
+      - /home/$name/docker_apps/file_browser/filebrowser.db:/database.db
     restart: unless-stopped
     security_opt:
       - no-new-privileges:true" >> docker_apps/file_browser/docker-compose.yml
@@ -125,7 +124,7 @@ services:
       - PGID=$PGID
       - TZ=$TZ
     volumes:
-      - /home/ubuntu/docker_apps/heimdall/config/:/config
+      - /home/$name/docker_apps/heimdall/config/:/config
     #ports:
     #  - 80:80
     #  - 443:443
@@ -147,8 +146,8 @@ services:
       - TZ=$TZ
       - JELLYFIN_PublishedServerUrl=$IP #optional
     volumes:
-      - /home/ubuntu/docker_apps/jellyfin/config/:/config
-      - /home/ubuntu/data/media/:/data/media
+      - /home/$name/docker_apps/jellyfin/config/:/config
+      - /home/$name/data/media/:/data/media
     #ports:
     #  - 8096:8096
     #  - 8920:8920 #optional
@@ -263,9 +262,9 @@ services:
       - TZ=$TZ
       - WEBUI_PORT=8080
     volumes:
-      - /home/ubuntu/docker_apps/qbittorrent/config:/config
-      - /home/ubuntu/data/torrents/:/data/torrents/
-      - /home/ubuntu/docker_apps/qbittorrent/vuetorrent:/vuetorrent
+      - /home/$name/docker_apps/qbittorrent/config:/config
+      - /home/$name/data/torrents/:/data/torrents/
+      - /home/$name/docker_apps/qbittorrent/vuetorrent:/vuetorrent
     ports:
       - 8080:8080
       - 6881:6881
@@ -283,8 +282,8 @@ services:
       - TZ=$TZ
       - DOCKER_MODS=ghcr.io/gilbn/theme.park:radarr
     volumes:
-      - /home/ubuntu/docker_apps/radarr/config/:/config
-      - /home/ubuntu/data/:/data #optional
+      - /home/$name/docker_apps/radarr/config/:/config
+      - /home/$name/data/:/data #optional
     #ports:
     #  - 7878:7878
     restart: unless-stopped
@@ -305,8 +304,8 @@ services:
       - TZ=$TZ
       - DOCKER_MODS=ghcr.io/gilbn/theme.park:sonarr      
     volumes:
-      - /home/ubuntu/docker_apps/sonarr/config/:/config
-      - /home/ubuntu/data/:/data
+      - /home/$name/docker_apps/sonarr/config/:/config
+      - /home/$name/data/:/data
     #ports:
     #  - 8989:8989
     restart: unless-stopped
@@ -327,9 +326,9 @@ services:
       - PUID=$PUID
       - PGID=$PGID
     volumes:
-      - /home/ubuntu/docker_apps/unmanic/config/:/config
-      - /home/ubuntu/data/media/movies/:/library/movies
-      - /home/ubuntu/data/media/tv/:/library/tv
+      - /home/$name/docker_apps/unmanic/config/:/config
+      - /home/$name/data/media/movies/:/library/movies
+      - /home/$name/data/media/tv/:/library/tv
       - /tmp/:/tmp/unmanic
     restart: unless-stopped
     
@@ -344,7 +343,7 @@ services:
     image: louislam/uptime-kuma:1
     container_name: uptime_kuma
     volumes:
-      - /home/ubuntu/docker_apps/uptime_kuma/data:/app/data
+      - /home/$name/docker_apps/uptime_kuma/data:/app/data
     #ports:
     #  - 3001:3001
     restart: unless-stopped
@@ -375,7 +374,7 @@ services:
       - INTERNAL_SUBNET=10.13.13.0 #optional
       - ALLOWEDIPS=0.0.0.0/0 #optional
     volumes:
-      - /home/ubuntu/docker_apps/wireguard/config:/config
+      - /home/$name/docker_apps/wireguard/config:/config
       - /lib/modules:/lib/modules
     ports:
       - 51820:51820/udp
@@ -393,7 +392,7 @@ services:
       - PGID=$PGID
       - TZ=$TZ
     volumes:
-      - /home/ubuntu/docker_apps/prowlarr/config/:/config
+      - /home/$name/docker_apps/prowlarr/config/:/config
     #ports:
     #  - 9696:9696
     restart: unless-stopped
@@ -409,7 +408,7 @@ services:
     image: oznu/guacamole:armhf
     container_name: guacamole
     volumes:
-      - /home/docker_apps/guacamole/config/:/config
+      - /home/$name/docker_apps/guacamole/config/:/config
     ports:
       - 9000:8080
     restart: unless-stopped" >> docker_apps/guacamole/docker-compose.yml
@@ -445,17 +444,13 @@ services:
     image: lscr.io/linuxserver/code-server:latest
     container_name: code-server
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/London
-      - PASSWORD=password #optional
-      - HASHED_PASSWORD= #optional
-      - SUDO_PASSWORD=password #optional
-      - SUDO_PASSWORD_HASH= #optional
-      - PROXY_DOMAIN=code-server.my.domain #optional
-      - DEFAULT_WORKSPACE=/config/workspace #optional
+      - PUID=$PUID
+      - PGID=$PGID
+      - TZ=$TZ
+      - PASSWORD=$codepass #optional
+      - SUDO_PASSWORD=$codepass #optional
     volumes:
-      - /path/to/appdata/config:/config
+      - /home/$name/docker_apps/code_server/config :/config
     #ports:
     #  - 8443:8443
     restart: unless-stopped
@@ -471,13 +466,13 @@ services:
     image: lscr.io/linuxserver/duplicati:latest
     container_name: duplicati
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/London
+      - PUID=$PUID
+      - PGID=$PGID
+      - TZ=$TZ
       - CLI_ARGS= #optional
     volumes:
-      - </path/to/appdata/config>:/config
-      - </path/to/backups>:/backups
+      - /home/$name/docker_apps/duplicati/config :/config
+      - /home/$name/docker_apps/duplicati/backups:/backups
       - </path/to/source>:/source
     #ports:
     #  - 8200:8200
@@ -495,11 +490,11 @@ services:
        container_name: jellyseerr
        environment:
             - LOG_LEVEL=debug
-            - TZ=Asia/Tashkent
+            - TZ=$TZ
        #ports:
        #     - 5055:5055
        volumes:
-            - /path/to/appdata/config:/app/config
+            - /home/$name/docker_apps/jellyseer/config:/app/config
        restart: unless-stopped
        
 networks:
@@ -513,12 +508,12 @@ services:
     image: lscr.io/linuxserver/nextcloud:latest
     container_name: nextcloud
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/London
+      - PUID=$PUID
+      - PGID=$PGID
+      - TZ=$TZ
     volumes:
-      - /path/to/appdata:/config
-      - /path/to/data:/data
+      - /home/$name/docker_apps/nextcloud/config:/config
+      - /home/$name/:/data
     #ports:
     #  - 443:443
     restart: unless-stopped
@@ -531,9 +526,9 @@ networks:
 echo "------------------------Docker Compose Files Setup Complete------------------------"
 sleep 2
 echo "------------------------Adding Required Permissions to Folders------------------------"
-chown -R ubuntu:ubuntu data/
+chown -R $name:$name data/
 chmod -R 775 data/
-chown -R ubuntu:ubuntu docker_apps/
+chown -R $name:$name docker_apps/
 chmod -R 775 docker_apps/
 echo "------------------------Permissions Added------------------------"
 echo "------------------------Setup Complete Now Run Deploy.sh without sudo to Deploy the Containers------------------------"
