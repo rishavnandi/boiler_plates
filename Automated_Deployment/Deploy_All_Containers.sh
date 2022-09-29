@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "Enter username"
+echo "------------------------Enter Username------------------------"
 read name
 cd /home/$name && cd docker_apps
 echo "------------------------Deploying Containers------------------------"

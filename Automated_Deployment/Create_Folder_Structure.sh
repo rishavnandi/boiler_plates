@@ -1,16 +1,16 @@
 #!/bin/bash
 
-echo "Enter username"
+echo "------------------------Enter Username------------------------"
 read name
 cd /home/$name/
 
-echo "Enter Your PUID"
+echo "------------------------Enter Your PUID------------------------"
 read PUID
-echo "Enter Your PGID"
+echo "------------------------Enter Your PGID------------------------"
 read PGID
-echo "Enter Your Timezone"
+echo "------------------------Enter Your Timezone------------------------"
 read TZ
-echo "Enter IP Address of your server"
+echo "------------------------Enter IP Address of your server------------------------"
 read IP
 
 echo "------------------------Creating Folder Structure------------------------"
