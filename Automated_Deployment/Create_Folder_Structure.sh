@@ -45,7 +45,7 @@ mkdir docker_apps/portainer
 mkdir docker_apps/vaultwarden
 mkdir docker_apps/code_server
 mkdir docker_apps/duplicati
-mkdir docker_apps/jellyseer
+mkdir docker_apps/jellyseerr
 mkdir docker_apps/nextcloud
 mkdir /etc/prometheus/
 
@@ -473,7 +473,7 @@ services:
     volumes:
       - /home/$name/docker_apps/duplicati/config :/config
       - /home/$name/docker_apps/duplicati/backups:/backups
-      - </path/to/source>:/source
+      - /home/$name/docker_apps/:/source
     #ports:
     #  - 8200:8200
     restart: unless-stopped
@@ -494,7 +494,7 @@ services:
        #ports:
        #     - 5055:5055
        volumes:
-            - /home/$name/docker_apps/jellyseer/config:/app/config
+            - /home/$name/docker_apps/jellyseerr/config:/app/config
        restart: unless-stopped
        
 networks:
