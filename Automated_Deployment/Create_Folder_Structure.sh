@@ -463,7 +463,7 @@ services:
 networks:
   default:
     external:
-      name: homelab" >> docker_apps/code-server/docker-compose.yml
+      name: homelab" >> docker_apps/code_server/docker-compose.yml
 
 echo "version: "2.1"
 services:
