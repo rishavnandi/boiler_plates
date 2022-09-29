@@ -21,3 +21,7 @@ cd .. && cd guacamole && docker compose up -d --force-recreate
 cd .. && cd nginx && docker compose up -d --force-recreate
 cd .. && cd portainer && docker compose up -d --force-recreate
 cd .. && cd vaultwarden && docker compose up -d --force-recreate
+cd .. && cd code_server && docker compose up -d --force-recreate
+cd .. && cd duplicati && docker compose up -d --force-recreate
+cd .. && cd jellyseerr && docker compose up -d --force-recreate
+cd .. && cd nextcloud && docker compose up -d --force-recreate
