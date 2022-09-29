@@ -47,6 +47,7 @@ mkdir docker_apps/code_server
 mkdir docker_apps/duplicati
 mkdir docker_apps/jellyseerr
 mkdir docker_apps/nextcloud
+mkdir docker_apps/watchtower
 mkdir /etc/prometheus/
 
 echo "------------------------Folder Structure Created------------------------"
@@ -522,6 +523,16 @@ networks:
   default:
     external:
       name: homelab" >> docker_apps/nextcloud/docker-compose.yml
+
+echo "version: '3'
+services:
+  watchtower:
+    image: containrrr/watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    enviroment:
+      - WATCHTOWER_CLEANUP=true
+    restart: unless-stopped" >> docker_apps/watchtower/docker-compose.yml
 
 echo "------------------------Docker Compose Files Setup Complete------------------------"
 sleep 2

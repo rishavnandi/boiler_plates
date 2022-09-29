@@ -25,3 +25,4 @@ cd .. && cd code_server && docker compose up -d --force-recreate
 cd .. && cd duplicati && docker compose up -d --force-recreate
 cd .. && cd jellyseerr && docker compose up -d --force-recreate
 cd .. && cd nextcloud && docker compose up -d --force-recreate
+cd .. && cd watchtower && docker compose up -d --force-recreate
