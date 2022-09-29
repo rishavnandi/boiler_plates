@@ -44,31 +44,16 @@ mkdir docker_apps/guacamole
 mkdir docker_apps/ubooquity
 mkdir docker_apps/portainer
 mkdir docker_apps/vaultwarden
+mkdir docker_apps/code_server
+mkdir docker_apps/duplicati
+mkdir docker_apps/jellyseer
+mkdir docker_apps/nextcloud
 mkdir /etc/prometheus/
 
 echo "------------------------Folder Structure Created------------------------"
 echo "------------------------Creating Docker Compose Files------------------------"
 sleep 2
-touch docker_apps/bazarr/docker-compose.yml
-touch docker_apps/file_browser/docker-compose.yml
 touch docker_apps/file_browser/filebrowser.db
-touch docker_apps/heimdall/docker-compose.yml
-touch docker_apps/jackett/docker-compose.yml
-touch docker_apps/jellyfin/docker-compose.yml
-touch docker_apps/monitoring/docker-compose.yml
-touch docker_apps/nginx/docker-compose.yml
-touch docker_apps/qbittorrent/docker-compose.yml
-touch docker_apps/radarr/docker-compose.yml
-touch docker_apps/sonarr/docker-compose.yml
-touch docker_apps/unmanic/docker-compose.yml
-touch docker_apps/uptime_kuma/docker-compose.yml
-touch docker_apps/wireguard/docker-compose.yml
-touch docker_apps/prowlarr/docker-compose.yml
-touch docker_apps/readarr/docker-compose.yml
-touch docker_apps/guacamole/docker-compose.yml
-touch docker_apps/overseerr/docker-compose.yml
-touch docker_apps/ubooquity/docker-compose.yml
-touch docker_apps/vaultwarden/docker-compose.yml
 touch /etc/prometheus/prometheus.yml
 
 echo "------------------------Docker Compose Files Created------------------------"
@@ -296,6 +281,7 @@ services:
       - PUID=$PUID
       - PGID=$PGID
       - TZ=$TZ
+      - DOCKER_MODS=ghcr.io/gilbn/theme.park:radarr
     volumes:
       - /home/ubuntu/docker_apps/radarr/config/:/config
       - /home/ubuntu/data/:/data #optional
@@ -317,6 +303,7 @@ services:
       - PUID=$PUID
       - PGID=$PGID
       - TZ=$TZ
+      - DOCKER_MODS=ghcr.io/gilbn/theme.park:sonarr      
     volumes:
       - /home/ubuntu/docker_apps/sonarr/config/:/config
       - /home/ubuntu/data/:/data
@@ -451,6 +438,95 @@ services:
     restart: unless-stopped
     volumes:
       - ./vw-data:/data" >> docker_apps/vaultwarden/docker-compose.yml
+
+echo "version: '2.1'
+services:
+  code-server:
+    image: lscr.io/linuxserver/code-server:latest
+    container_name: code-server
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+      - PASSWORD=password #optional
+      - HASHED_PASSWORD= #optional
+      - SUDO_PASSWORD=password #optional
+      - SUDO_PASSWORD_HASH= #optional
+      - PROXY_DOMAIN=code-server.my.domain #optional
+      - DEFAULT_WORKSPACE=/config/workspace #optional
+    volumes:
+      - /path/to/appdata/config:/config
+    #ports:
+    #  - 8443:8443
+    restart: unless-stopped
+    
+networks:
+  default:
+    external:
+      name: homelab" >> docker_apps/code-server/docker-compose.yml
+
+echo "version: "2.1"
+services:
+  duplicati:
+    image: lscr.io/linuxserver/duplicati:latest
+    container_name: duplicati
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+      - CLI_ARGS= #optional
+    volumes:
+      - </path/to/appdata/config>:/config
+      - </path/to/backups>:/backups
+      - </path/to/source>:/source
+    #ports:
+    #  - 8200:8200
+    restart: unless-stopped
+    
+networks:
+  default:
+    external:
+      name: homelab" >> docker_apps/duplicati/docker-compose.yml
+
+echo "version: '3'
+services:
+    jellyseerr:
+       image: fallenbagel/jellyseerr:latest
+       container_name: jellyseerr
+       environment:
+            - LOG_LEVEL=debug
+            - TZ=Asia/Tashkent
+       #ports:
+       #     - 5055:5055
+       volumes:
+            - /path/to/appdata/config:/app/config
+       restart: unless-stopped
+       
+networks:
+  default:
+    external:
+      name: homelab" >> docker_apps/jellyseerr/docker-compose.yml
+
+echo "version: "2.1"
+services:
+  nextcloud:
+    image: lscr.io/linuxserver/nextcloud:latest
+    container_name: nextcloud
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+    volumes:
+      - /path/to/appdata:/config
+      - /path/to/data:/data
+    #ports:
+    #  - 443:443
+    restart: unless-stopped
+    
+networks:
+  default:
+    external:
+      name: homelab" >> docker_apps/nextcloud/docker-compose.yml
 
 echo "------------------------Docker Compose Files Setup Complete------------------------"
 sleep 2

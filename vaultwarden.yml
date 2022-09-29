@@ -6,3 +6,5 @@ services:
     restart: unless-stopped
     volumes:
       - ./vw-data:/data
+    #ports:
+    #  - 80:80
