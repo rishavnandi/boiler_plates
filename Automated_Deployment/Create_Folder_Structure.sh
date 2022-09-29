@@ -436,7 +436,12 @@ services:
     container_name: vaultwarden
     restart: unless-stopped
     volumes:
-      - ./vw-data:/data" >> docker_apps/vaultwarden/docker-compose.yml
+      - ./vw-data:/data
+      
+networks:
+  default:
+    external:
+      name: homelab" >> docker_apps/vaultwarden/docker-compose.yml
 
 echo "version: '2.1'
 services:
