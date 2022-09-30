@@ -428,8 +428,13 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./portainer-data:/data
-    ports:
-      - 9443:9443" >> docker_apps/portainer/docker-compose.yml
+    #ports:
+    #  - 9443:9443
+      
+networks:
+  default:
+    external:
+      name: homelab" >> docker_apps/portainer/docker-compose.yml
 
 echo "version: '3'
 services:
