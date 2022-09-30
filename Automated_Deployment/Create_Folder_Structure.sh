@@ -15,6 +15,8 @@ echo "------------------------Enter Your Timezone------------------------"
 read TZ
 echo "------------------------Enter IP Address of your server------------------------"
 read IP
+echo "------------------------Enter Number Of PEERS For Wireguard------------------------"
+read PEERS
 
 echo "------------------------Creating Folder Structure------------------------"
 sleep 2
@@ -193,7 +195,7 @@ services:
       - '/:/host:ro,rslave'
 
   cadvisor:
-    image: budry/cadvisor-arm:latest
+    image: raymondmm/cadvisor
     container_name: cadvisor
     # ports:
     #   - "8080:8080"
@@ -370,7 +372,7 @@ services:
       - TZ=$TZ
       - SERVERURL=$IP #optional
       - SERVERPORT=51820 #optional
-      - PEERS=1 #optional
+      - PEERS=$PEERS #optional
       - PEERDNS=auto #optional
       - INTERNAL_SUBNET=10.13.13.0 #optional
       - ALLOWEDIPS=0.0.0.0/0 #optional
