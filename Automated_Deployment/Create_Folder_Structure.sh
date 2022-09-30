@@ -48,7 +48,6 @@ mkdir docker_apps/vaultwarden
 mkdir docker_apps/code_server
 mkdir docker_apps/duplicati
 mkdir docker_apps/jellyseerr
-mkdir docker_apps/nextcloud
 mkdir docker_apps/watchtower
 mkdir /etc/prometheus/
 
@@ -373,7 +372,7 @@ services:
       - SERVERURL=$IP #optional
       - SERVERPORT=51820 #optional
       - PEERS=$PEERS #optional
-      - PEERDNS=auto #optional
+      - PEERDNS=94.140.14.14 #optional
       - INTERNAL_SUBNET=10.13.13.0 #optional
       - ALLOWEDIPS=0.0.0.0/0 #optional
     volumes:
@@ -514,27 +513,6 @@ networks:
   default:
     external:
       name: homelab" >> docker_apps/jellyseerr/docker-compose.yml
-
-echo "version: '2.1'
-services:
-  nextcloud:
-    image: lscr.io/linuxserver/nextcloud:latest
-    container_name: nextcloud
-    environment:
-      - PUID=$PUID
-      - PGID=$PGID
-      - TZ=$TZ
-    volumes:
-      - /home/$name/docker_apps/nextcloud/config:/config
-      - /home/$name/:/data
-    #ports:
-    #  - 443:443
-    restart: unless-stopped
-    
-networks:
-  default:
-    external:
-      name: homelab" >> docker_apps/nextcloud/docker-compose.yml
 
 echo "version: '3'
 services:
