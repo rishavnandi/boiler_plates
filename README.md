@@ -9,20 +9,30 @@ The boilerplates list is not exhaustive by any means, but for a beginner homelab
 ![Screenshot (8)](https://user-images.githubusercontent.com/101431112/191025223-6159b505-b213-4c02-b07c-66ee964b1c7d.png)
 
 ## Usage
-<ul>
-    <li>Clone the repository</li>
-    <li>Navigate to Automated_Deployment directory</li>
-    <li>Run Install_Docker.sh</li>
-    <li>Run Create_Folder_Structure.sh</li>
-    <li>Replace the <PGID> and <PUID> placeholders with appropriate values for your system</li>
-    <li>Replace the <Enter URL> placeholders with appropriate values for your system</li>
-    <li>Run Deploy_All_Containers.sh</li>
-</ul>
+Make sure your server is updated
+```sudo apt update && sudo apt upgrade -y && sudo reboot```
+
+Clone the repo
+```git clone https://github.com/rishavnandi/Boiler_plates && cd Boiler_plates/Automated_Deployment```
+
+Make the scripts executable
+```sudo chmod +x Install_Docker.sh Create_Folder_Structure.sh Deploy_All_Containers.sh```
+
+Install Docker
+```sudo ./Install_Docker.sh```
+
+Reboot or logout so user can be added to Docker group
+```sudo reboot```
+
+Run the script to create all docker compose files
+```cd Boiler_plates/Automated_Deployment && sudo ./Create_Folder_Structure.sh```
+
+Finally deploy all containers
+```./Deploy_All_Containers.sh```
 
 ## Important!
 
-I have left placeholders for the PGID and PUID parameters and the URL parameters in the "Create_Folder_Structure.sh" file, so anyone can replace them with the required values easily. Remember to replace them according to your system configuration.
+Now you can navigate to ```<your_IP>:81``` to get to nginx proxy manager and you can start setting your domains up.
 
 To check the id values for your system simply type "id" without the quotation marks in your terminal and you will see the gid and uid values for your system.
 
-In the <Enter URL> placeholders for wireguard and jellyfin you can simply add your servers IP address in that place.
