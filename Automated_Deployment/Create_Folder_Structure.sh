@@ -51,6 +51,10 @@ mkdir docker_apps/jellyseerr
 mkdir docker_apps/watchtower
 mkdir /etc/prometheus/
 
+apt install unzip
+cd docker_apps/qbittorrent && wget https://github.com/WDaan/VueTorrent/releases/download/v0.18.2/vuetorrent.zip && unzip vuetorrent.zip
+cd /home/$name/
+
 echo "------------------------Folder Structure Created------------------------"
 echo "------------------------Creating Docker Compose Files------------------------"
 sleep 2
