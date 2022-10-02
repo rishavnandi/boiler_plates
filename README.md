@@ -10,25 +10,39 @@ The boilerplates list is not exhaustive by any means, but for a beginner homelab
 
 ## Usage
 Make sure your server is updated
-```sudo apt update && sudo apt upgrade -y && sudo reboot```
+```shell
+sudo apt update && sudo apt upgrade -y && sudo reboot
+```
 
 Clone the repo
-```git clone https://github.com/rishavnandi/Boiler_plates && cd Boiler_plates/Automated_Deployment```
+```shell
+git clone https://github.com/rishavnandi/Boiler_plates && cd Boiler_plates/Automated_Deployment
+```
 
 Make the scripts executable
-```sudo chmod +x Install_Docker.sh Create_Folder_Structure.sh Deploy_All_Containers.sh```
+```shell
+sudo chmod +x Install_Docker.sh Create_Folder_Structure.sh Deploy_All_Containers.sh
+```
 
 Install Docker
-```sudo ./Install_Docker.sh```
+```shell
+sudo ./Install_Docker.sh
+```
 
 Reboot or logout so user can be added to Docker group
-```sudo reboot```
+```shell
+sudo reboot
+```
 
 Run the script to create all docker compose files
-```cd Boiler_plates/Automated_Deployment && sudo ./Create_Folder_Structure.sh```
+```shell
+cd Boiler_plates/Automated_Deployment && sudo ./Create_Folder_Structure.sh
+```
 
 Finally deploy all containers
-```./Deploy_All_Containers.sh```
+```shell
+./Deploy_All_Containers.sh
+```
 
 ## Important!
 
