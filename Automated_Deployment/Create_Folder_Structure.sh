@@ -490,8 +490,8 @@ services:
       - /home/$name/docker_apps/duplicati/config:/config
       - /home/$name/docker_apps/duplicati/backups:/backups
       - /home/$name/docker_apps/:/source
-    #ports:
-    #  - 8200:8200
+    ports:
+      - 8200:8200
     restart: unless-stopped
     
 networks:
