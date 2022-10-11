@@ -29,26 +29,36 @@ mkdir data/torrents/tv
 mkdir data/media/movies
 mkdir data/media/tv
 
-mkdir docker_apps/bazarr
-mkdir docker_apps/file_browser
-mkdir docker_apps/heimdall
-mkdir docker_apps/jellyfin
-mkdir docker_apps/monitoring
-mkdir docker_apps/nginx
-mkdir docker_apps/qbittorrent
-mkdir docker_apps/radarr
-mkdir docker_apps/sonarr
-mkdir docker_apps/unmanic
-mkdir docker_apps/uptime_kuma
-mkdir docker_apps/wireguard
-mkdir docker_apps/prowlarr
-mkdir docker_apps/guacamole
-mkdir docker_apps/portainer
-mkdir docker_apps/vaultwarden
-mkdir docker_apps/code_server
-mkdir docker_apps/duplicati
-mkdir docker_apps/jellyseerr
-mkdir docker_apps/watchtower
+
+APPS={ 
+  bazarr
+  file_browser 
+  heimdall 
+  jackett 
+  jellyfin 
+  monitoring 
+  nginx 
+  qbittorrent 
+  radarr 
+  sonarr 
+  unmanic 
+  uptime_kuma 
+  wireguard 
+  prowlarr 
+  guacamole 
+  portainer 
+  vaultwarden 
+  code_server 
+  duplicati 
+  jellyseerr
+  watchtower
+}
+
+for app in $APPS
+do
+    mkdir docker_apps/$app && touch docker_apps/$app/docker-compose.yml
+done
+
 mkdir /etc/prometheus/
 
 apt install unzip
