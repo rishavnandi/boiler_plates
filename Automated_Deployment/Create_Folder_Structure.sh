@@ -31,27 +31,27 @@ mkdir data/media/tv
 
 
 APPS={ 
-  bazarr
-  file_browser 
-  heimdall 
-  jackett 
-  jellyfin 
-  monitoring 
-  nginx 
-  qbittorrent 
-  radarr 
-  sonarr 
-  unmanic 
-  uptime_kuma 
-  wireguard 
-  prowlarr 
-  guacamole 
-  portainer 
-  vaultwarden 
-  code_server 
-  duplicati 
-  jellyseerr
-  watchtower
+  "bazarr"
+  "file_browser" 
+  "heimdall" 
+  "jackett" 
+  "jellyfin" 
+  "monitoring" 
+  "nginx" 
+  "qbittorrent" 
+  "radarr" 
+  "sonarr" 
+  "unmanic" 
+  "uptime_kuma" 
+  "wireguard" 
+  "prowlarr" 
+  "guacamole" 
+  "portainer" 
+  "vaultwarden" 
+  "code_server" 
+  "duplicati" 
+  "jellyseerr"
+  "watchtower"
 }
 
 for app in $APPS
