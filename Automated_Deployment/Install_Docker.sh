@@ -1,7 +1,6 @@
 #!/bin/bash
 
-echo "------------------------Type 'arm64' If Using On ARM64 Server Else Type 'x86_64'------------------------"
-read arch
+arch=$(arch)
 
 echo "------------------------Updating Cache------------------------"
 apt update
