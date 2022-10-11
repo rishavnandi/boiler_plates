@@ -5,50 +5,31 @@ read name
 cd /home/$name && cd docker_apps
 echo "------------------------Deploying Containers------------------------"
 
-cd bazarr && docker compose up -d --force-recreate
-cd .. && cd file_browser && docker compose up -d --force-recreate
-cd .. && cd heimdall && docker compose up -d --force-recreate
-cd .. && cd jellyfin && docker compose up -d --force-recreate
-cd .. && cd monitoring && docker compose up -d --force-recreate
-cd .. && cd qbittorrent && docker compose up -d --force-recreate
-cd .. && cd radarr && docker compose up -d --force-recreate
-cd .. && cd sonarr && docker compose up -d --force-recreate
-cd .. && cd unmanic && docker compose up -d --force-recreate
-cd .. && cd uptime_kuma && docker compose up -d --force-recreate
-cd .. && cd wireguard && docker compose up -d --force-recreate
-cd .. && cd prowlarr && docker compose up -d --force-recreate
-cd .. && cd guacamole && docker compose up -d --force-recreate
-cd .. && cd nginx && docker compose up -d --force-recreate
-cd .. && cd portainer && docker compose up -d --force-recreate
-cd .. && cd vaultwarden && docker compose up -d --force-recreate
-cd .. && cd code_server && docker compose up -d --force-recreate
-cd .. && cd duplicati && docker compose up -d --force-recreate
-cd .. && cd jellyseerr && docker compose up -d --force-recreate
-cd .. && cd watchtower && docker compose up -d --force-recreate
+docker_apps=(
+    "bazarr"
+    "file_browser" 
+    "heimdall" 
+    "jellyfin"
+    "monitoring" 
+    "qbittorrent" 
+    "radarr" 
+    "sonarr" 
+    "unmanic" 
+    "uptime_kuma" 
+    "wireguard" 
+    "prowlarr" 
+    "guacamole" 
+    "nginx" 
+    "portainer" 
+    "vaultwarden"
+    "code_server"
+    "duplicati"
+    "jellyseerr"
+    "watchtower"
+)
 
-docker_apps={
-    bazarr
-    file_browser 
-    heimdall 
-    jellyfin 
-    monitoring 
-    qbittorrent 
-    radarr 
-    sonarr 
-    unmanic 
-    uptime_kuma 
-    wireguard 
-    prowlarr 
-    guacamole 
-    nginx 
-    portainer 
-    vaultwarden
-    code_server
-    duplicati
-    jellyseerr
-    watchtower
-}
-for app in docker_apps/*/; do
+for app in ${docker_apps}[@]; do
     cd $app
     docker compose up -d --force-recreate
+    cd ..
 done
