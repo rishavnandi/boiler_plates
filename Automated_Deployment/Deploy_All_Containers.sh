@@ -15,7 +15,6 @@ cd /home/$name && cd docker_apps
 echo "------------------------Deploying Containers------------------------"
 
 docker_apps=(
-    "bazarr"
     "file_browser" 
     "heimdall" 
     "jellyfin"

@@ -38,7 +38,6 @@ mkdir data/media/tv
 
 
 APPS=(
-    "bazarr"
     "file_browser"
     "heimdall"
     "jackett"
@@ -100,28 +99,7 @@ scrape_configs:
   - job_name: 'cadvisor'
     static_configs:
       - targets: ['cadvisor:8080']" >> /etc/prometheus/prometheus.yml
-
-echo "version: '2.1'
-services:
-  bazarr:
-    image: lscr.io/linuxserver/bazarr
-    container_name: bazarr
-    environment:
-      - PUID=$PUID
-      - PGID=$PGID
-      - TZ=$TZ
-    volumes:
-      - /home/$name/docker_apps/bazarr/config:/config
-      - /home/$name/data/:/data
-    #ports:
-    #  - 6767:6767
-    restart: unless-stopped
-
-networks:
-  default:
-    external:
-      name: homelab" >> docker_apps/bazarr/docker-compose.yml
-
+      
 echo "version: '3'
 services:
   file-browser:
