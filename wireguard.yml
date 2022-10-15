@@ -1,26 +1,19 @@
-version: "2.1"
+version: "3.8"
 services:
-  wireguard:
-    image: lscr.io/linuxserver/wireguard
-    container_name: wireguard
+  wg-easy:
+    environment:
+      - WG_HOST=<Enter URL>
+    image: weejewel/wg-easy
+    container_name: wg-easy
+    volumes:
+      - .:/etc/wireguard
+    ports:
+      - "51820:51820/udp"
+      - "51821:51821/tcp"
+    restart: unless-stopped
     cap_add:
       - NET_ADMIN
       - SYS_MODULE
-    environment:
-      - PUID=<PUID>
-      - PGID=<PGID>
-      - TZ=Asia/Kolkata
-      - SERVERURL=<Enter URL> #optional
-      - SERVERPORT=51820 #optional
-      - PEERS=1 #optional
-      - PEERDNS=auto #optional
-      - INTERNAL_SUBNET=10.13.13.0 #optional
-      - ALLOWEDIPS=0.0.0.0/0 #optional
-    volumes:
-      - /home/ubuntu/docker_apps/wireguard/config:/config
-      - /lib/modules:/lib/modules
-    ports:
-      - 51820:51820/udp
     sysctls:
+      - net.ipv4.ip_forward=1
       - net.ipv4.conf.all.src_valid_mark=1
-    restart: unless-stopped
