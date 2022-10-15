@@ -16,6 +16,8 @@ cd /home/$name/
 
 echo "------------------------Enter Code Server Password------------------------"
 read codepass
+echo "------------------------Enter Wireguard Password------------------------"
+read wirepass
 
 echo "------------------------Enter Your PUID------------------------"
 read PUID
@@ -359,32 +361,26 @@ networks:
     external:
       name: homelab" >> docker_apps/uptime_kuma/docker-compose.yml
 
-echo "version: '2.1'
+echo "version: '3.8'
 services:
-  wireguard:
-    image: lscr.io/linuxserver/wireguard
-    container_name: wireguard
+  wg-easy:
+    environment:
+      - WG_HOST=$IP
+      - PASSWORD=$wirepass
+    image: weejewel/wg-easy
+    container_name: wg-easy
+    volumes:
+      - /home/$name/docker_apps/wireguard/config/:/etc/wireguard
+    ports:
+      - 51820:51820/udp
+      - 51821:51821/tcp
+    restart: unless-stopped
     cap_add:
       - NET_ADMIN
       - SYS_MODULE
-    environment:
-      - PUID=$PUID
-      - PGID=$PGID
-      - TZ=$TZ
-      - SERVERURL=$IP #optional
-      - SERVERPORT=51820 #optional
-      - PEERS=$PEERS #optional
-      - PEERDNS=94.140.14.14 #optional
-      - INTERNAL_SUBNET=10.13.13.0 #optional
-      - ALLOWEDIPS=0.0.0.0/0 #optional
-    volumes:
-      - /home/$name/docker_apps/wireguard/config:/config
-      - /lib/modules:/lib/modules
-    ports:
-      - 51820:51820/udp
     sysctls:
-      - net.ipv4.conf.all.src_valid_mark=1
-    restart: unless-stopped" >> docker_apps/wireguard/docker-compose.yml
+      - net.ipv4.ip_forward=1
+      - net.ipv4.conf.all.src_valid_mark=1" >> docker_apps/wireguard/docker-compose.yml
 
 echo "version: '2.1'
 services:
