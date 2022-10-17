@@ -4,7 +4,7 @@ Contains docker compose YAML configurations for some of the most popular docker 
 
 The boilerplates list is not exhaustive by any means, but for a beginner homelaber it covers mostly all the popular docker containers like Radarr and Sonarr to download movies and shows and Jellyfin to stream them from anywhere anytime.
 
-- ## [Usage](https://github.com/rishavnandi/Boiler_Plates#usage)
+- ## [Usage](https://github.com/rishavnandi/Boiler_Plates#usage-1)
 - ## [Important Notes](https://github.com/rishavnandi/Boiler_Plates#important)
 
 ![Screenshot (6)](https://user-images.githubusercontent.com/101431112/193395772-fa724e23-c278-4231-921f-7e3fb333f708.png)
