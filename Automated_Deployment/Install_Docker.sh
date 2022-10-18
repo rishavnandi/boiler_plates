@@ -49,7 +49,7 @@ echo "------------------------Installing Docker Compose------------------------"
 sleep 2
 DOCKER_CONFIG=${DOCKER_CONFIG:-$HOME/.docker}
 mkdir -p $DOCKER_CONFIG/cli-plugins
-curl -SL https://github.com/docker/compose/releases/download/v2.11.1/docker-compose-linux-$arch -o $DOCKER_CONFIG/cli-plugins/docker-compose
+curl -SL https://github.com/docker/compose/releases/download/v2.11.2/docker-compose-linux-$arch -o $DOCKER_CONFIG/cli-plugins/docker-compose
 sleep 2
 chmod +x $DOCKER_CONFIG/cli-plugins/docker-compose
 
