@@ -20,7 +20,7 @@ sudo apt update && sudo apt upgrade -y && sudo reboot
 
 Clone the repo
 ```bash
-git clone https://github.com/rishavnandi/Boiler_Plates && cd Boiler_Plates/Automated_Deployment
+git clone https://github.com/rishavnandi/boiler_plates && cd boiler_plates/Automated_Deployment
 ```
 
 Make the scripts executable
@@ -40,7 +40,7 @@ sudo reboot
 
 Run the script to create all docker compose files
 ```bash
-cd Boiler_Plates/Automated_Deployment && sudo ./Create_Folder_Structure.sh
+cd boiler_plates/Automated_Deployment && sudo ./Create_Folder_Structure.sh
 ```
 
 Finally deploy all containers
