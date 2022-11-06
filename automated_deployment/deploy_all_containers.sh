@@ -34,6 +34,7 @@ docker_apps=(
     "duplicati"
     "jellyseerr"
     "watchtower"
+    "syncthing"
 )
 
 for app in ${docker_apps}[@]; do
