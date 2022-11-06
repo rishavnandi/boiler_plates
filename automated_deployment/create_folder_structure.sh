@@ -63,6 +63,7 @@ APPS=(
     "duplicati"
     "jellyseerr"
     "watchtower"
+    "syncthing"
 )
 
 for app in ${APPS[@]};
@@ -521,6 +522,26 @@ services:
     environment:
       - WATCHTOWER_CLEANUP=true
     restart: unless-stopped" >> docker_apps/watchtower/docker-compose.yml
+
+echo "version: '2.1'
+services:
+  syncthing:
+    image: lscr.io/linuxserver/syncthing:latest
+    container_name: syncthing
+    hostname: syncthing #optional
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+    volumes:
+      - /home/$name/docker_apps/syncthing/config/:/config
+      - /home/$name/docker_apps/syncthing/:/data1
+    ports:
+      # - 8384:8384
+      - 22000:22000/tcp
+      - 22000:22000/udp
+      - 21027:21027/udp
+    restart: unless-stopped" >> docker_apps/syncthing/docker-compose.yml
 
 echo "------------------------Docker Compose Files Setup Complete------------------------"
 sleep 2
