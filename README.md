@@ -25,12 +25,12 @@ git clone https://github.com/rishavnandi/boiler_plates && cd boiler_plates/Autom
 
 Make the scripts executable
 ```bash
-sudo chmod +x Install_Docker.sh Create_Folder_Structure.sh Deploy_All_Containers.sh
+sudo chmod +x install_docker.sh create_folder_structure.sh deploy_all_containers.sh
 ```
 
 Install Docker
 ```bash
-sudo ./Install_Docker.sh
+sudo ./install_docker.sh
 ```
 
 Reboot or logout so user can be added to Docker group
@@ -40,12 +40,12 @@ sudo reboot
 
 Run the script to create all docker compose files
 ```bash
-cd boiler_plates/Automated_Deployment && sudo ./Create_Folder_Structure.sh
+cd boiler_plates/automated_deployment && sudo ./create_folder_structure.sh
 ```
 
 Finally deploy all containers
 ```bash
-./Deploy_All_Containers.sh
+./deploy_all_containers.sh
 ```
 
 ## Important!
@@ -53,4 +53,3 @@ Finally deploy all containers
 Now you can navigate to ```<your_IP>:81``` to get to nginx proxy manager and you can start setting your domains up.
 
 To check the id values for your system simply type "id" without the quotation marks in your terminal and you will see the gid and uid values for your system.
-
