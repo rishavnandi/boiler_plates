@@ -27,8 +27,6 @@ echo "------------------------Enter Your Timezone------------------------"
 read TZ
 echo "------------------------Enter IP Address of your server------------------------"
 read IP
-echo "------------------------Enter Number Of PEERS For Wireguard------------------------"
-read PEERS
 
 echo "------------------------Creating Folder Structure------------------------"
 sleep 2
