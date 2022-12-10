@@ -507,7 +507,7 @@ services:
        volumes:
             - /home/$name/docker_apps/jellyseerr/config:/app/config
        restart: unless-stopped
-       
+
 networks:
   default:
     external:
@@ -530,9 +530,9 @@ services:
     container_name: syncthing
     hostname: syncthing #optional
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/London
+      - PUID=$PUID
+      - PGID=$PGID
+      - TZ=$TZ
     volumes:
       - /home/$name/docker_apps/syncthing/config/:/config
       - /home/$name/docker_apps/syncthing/:/data1
@@ -541,7 +541,12 @@ services:
       - 22000:22000/tcp
       - 22000:22000/udp
       - 21027:21027/udp
-    restart: unless-stopped" >> docker_apps/syncthing/docker-compose.yml
+    restart: unless-stopped
+
+networks:
+  default:
+    external:
+      name: homelab" >> docker_apps/syncthing/docker-compose.yml
 
 echo "------------------------Docker Compose Files Setup Complete------------------------"
 sleep 2
