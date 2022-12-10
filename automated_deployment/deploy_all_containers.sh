@@ -37,7 +37,7 @@ docker_apps=(
     "syncthing"
 )
 
-for app in ${docker_apps}[@]; do
+for app in ${docker_apps[@]}; do
     cd $app
     docker compose up -d --force-recreate
     cd ..
